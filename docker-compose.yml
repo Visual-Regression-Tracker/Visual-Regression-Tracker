@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+  ui:
+    image: visualregressiontracker/ui:0.0.1
+    ports:
+      - "${PORT}:8080"
+    environment: 
+      REACT_APP_API_URL: ${REACT_APP_API_URL}
+  api:
+    image: visualregressiontracker/api:0.0.1
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_LIFE_TIME: ${JWT_LIFE_TIME}
+      IMG_UPLOAD_FOLDER: ${IMG_UPLOAD_FOLDER}
+      APP_FRONTEND_URL: ${APP_FRONTEND_URL}
+    ports:
+      - "${APP_PORT}:3000"
+    expose:
+      - "${APP_PORT}"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    expose:
+      - "${POSTGRES_PORT}"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  migration:
+    image: visualregressiontracker/migration:0.0.1
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
+    depends_on:
+      - postgres
+volumes:
+  postgres:
+    
