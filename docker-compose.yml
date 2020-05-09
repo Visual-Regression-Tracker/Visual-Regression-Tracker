@@ -7,13 +7,14 @@ services:
     environment: 
       REACT_APP_API_URL: ${REACT_APP_API_URL}
   api:
-    image: visualregressiontracker/api:0.0.1
+    image: visualregressiontracker/api:0.0.2
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
       JWT_LIFE_TIME: ${JWT_LIFE_TIME}
       IMG_UPLOAD_FOLDER: ${IMG_UPLOAD_FOLDER}
       APP_FRONTEND_URL: ${APP_FRONTEND_URL}
+      BODY_PARSER_JSON_LIMIT: ${BODY_PARSER_JSON_LIMIT}
     ports:
       - "${APP_PORT}:3000"
     expose:
