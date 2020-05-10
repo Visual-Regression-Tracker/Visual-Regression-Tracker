@@ -10,6 +10,8 @@ Service for tracking visual changes in your application.
 
 ## Core SDK
 * [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js)
+* [Java](https://github.com/Visual-Regression-Tracker/sdk-java)
 
 ## Integration examples
 * [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js)
+* [Java](https://github.com/Visual-Regression-Tracker/examples-java)
