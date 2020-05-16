@@ -1,6 +1,8 @@
 # Visual Regression Tracker
 Service for tracking visual changes in your application.
 
+![demo](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/demo.gif)
+
 ## Set up
 1. Install [Docker](https://docs.docker.com/get-docker/)
 2. Copy [docker-compose.yml](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/docker-compose.yml) and [.env](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/.env) in one folder
