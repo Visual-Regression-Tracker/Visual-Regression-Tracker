@@ -7,7 +7,7 @@ services:
     environment: 
       REACT_APP_API_URL: ${REACT_APP_API_URL}
   api:
-    image: visualregressiontracker/api:0.0.5
+    image: visualregressiontracker/api:0.0.6
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
@@ -35,7 +35,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
   migration:
-    image: visualregressiontracker/migration:0.0.1
+    image: visualregressiontracker/migration:0.0.2
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
     depends_on:
