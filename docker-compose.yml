@@ -19,6 +19,8 @@ services:
       - "${APP_PORT}:3000"
     expose:
       - "${APP_PORT}"
+    volumes:
+      - ./imageUploads:/${IMG_UPLOAD_FOLDER}
     depends_on:
       - postgres
   postgres:
