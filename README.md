@@ -43,3 +43,6 @@ Basic wrapper over API to be used for integration with existing tools
 1. Logo image
 1. More language support for Core SDK
 1. Seamles integration with specific testing frameworks 
+
+## Community
+* [Telegram group](https://t.me/visual_tracker)
