@@ -28,15 +28,18 @@ Service for tracking visual changes in your application.
 1. Create a new project and copy it's `projectId`
 1. See blow `Integration examples` how to send data to the service
 
-## Integration examples
-Here you could find examples that shows how to use `Core SDK` together with popular tools 
-* [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js) - Playwright
-* [Java](https://github.com/Visual-Regression-Tracker/examples-java) - Selenium WebDriver
+## Native integration
+* [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
 
 ## Core SDK
 Basic wrapper over API to be used for integration with existing tools
 * [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js)
 * [Java](https://github.com/Visual-Regression-Tracker/sdk-java)
+
+## Integration examples
+Here you could find examples 
+* [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js) - Playwright, core SDK
+* [Java](https://github.com/Visual-Regression-Tracker/examples-java) - Selenium WebDriver
 
 ## Contribution
 1. Try it, rise tickets with ideas, questions, bugs and share feedback :)
