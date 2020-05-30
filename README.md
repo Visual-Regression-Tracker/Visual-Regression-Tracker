@@ -1,7 +1,11 @@
 # Visual Regression Tracker
-Service for tracking visual changes in your application.
+Open source, self hosted solution for visual testing and managing results of visual testing. 
 
-![demo](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/demo.gif)
+## How it works
+Service receives images, performs pixel by pixel comparison with it’s previously accepted baseline and provides immediate results in order to catch unexpected changes. 
+
+## Geting started guide
+* https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright
 
 ## Features
 * Automation framework independent - no need to stick with specifit automation tool, integrate with existiong one
@@ -28,6 +32,10 @@ Service for tracking visual changes in your application.
 1. Login with default user: `visual-regression-tracker@example.com/123456` and copy it's `apiKey`
 1. Create a new project and copy it's `projectId`
 1. See blow `Integration examples` how to send data to the service
+
+### Integration
+Use implemented libraries to integrate with existing automated suites by adding assertions based on image comparison.
+We provide native integration with automation libraries, core SDK and Rest API interfaces that allow the system to be used with any existing programming language.
 
 ## Native integration
 * [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
