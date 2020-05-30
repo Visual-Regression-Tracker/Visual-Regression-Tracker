@@ -4,9 +4,10 @@ Service for tracking visual changes in your application.
 ![demo](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/demo.gif)
 
 ## Features
+* Automation framework independent - no need to stick with specifit automation tool, integrate with existiong one
+* Platform independend - web, mobile, desktop etc. as long as you could make a screenshot
 * Baseline history - track how baseline image changed since the beginning
 * Ignore regions - improve stability by ignoring not important or not controllable parts of image
-* Web, mobile, desktop - any type of application is supported as long as you could make a screenshot
 * Language support: JS, Java or any other via REST API (need more?)
 * Easy setup - everything is inside Docker images
 * Self-hosted - keep your data save inside your intranet
