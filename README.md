@@ -5,7 +5,8 @@ Open source, self hosted solution for visual testing and managing results of vis
 Service receives images, performs pixel by pixel comparison with it’s previously accepted baseline and provides immediate results in order to catch unexpected changes. 
 
 ## Geting started guide
-* https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright
+* [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright)
+* [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook)
 
 ## Features
 * Automation framework independent - no need to stick with specifit automation tool, integrate with existiong one
