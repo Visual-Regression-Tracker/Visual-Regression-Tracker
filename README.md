@@ -4,19 +4,19 @@ Open source, self hosted solution for visual testing and managing results of vis
 ## How it works
 Service receives images, performs pixel by pixel comparison with it’s previously accepted baseline and provides immediate results in order to catch unexpected changes. 
 
-## Geting started guide
+## Getting started guide
 * [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright)
 * [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook)
 * [Selenide (Java)](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide)
 
 ## Features
-* Automation framework independent - no need to stick with specifit automation tool, integrate with existiong one
-* Platform independend - web, mobile, desktop etc. as long as you could make a screenshot
-* Baseline history - track how baseline image changed since the beginning
-* Ignore regions - improve stability by ignoring not important or not controllable parts of image
-* Language support: JS, Java or any other via REST API (need more?)
-* Easy setup - everything is inside Docker images
-* Self-hosted - keep your data save inside your intranet
+* **Automation framework independent** - no need to stick with specific automation tool, integrate with existing one
+* **Platform independent** - web, mobile, desktop etc. as long as you could make a screenshot
+* **Baseline history** - track how baseline image changed since the beginning
+* **Ignore regions** - improve stability by ignoring not important or not controllable parts of image
+* **Language support** - JS, Java or any other via REST API (need more?)
+* **Easy setup** - everything is inside Docker images
+* **Self-hosted** - keep your data save inside your intranet
 
 ## Glossary
 * TestVariation - unique identifier for Baseline, consists of Name + OS + Browser + Viewport
@@ -53,10 +53,12 @@ Here you could find examples
 * [Java](https://github.com/Visual-Regression-Tracker/examples-java) - Selenium WebDriver
 
 ## Contribution
-1. Try it, rise tickets with ideas, questions, bugs and share feedback :)
+1. Try it, raise tickets with ideas, questions, bugs and share feedback :)
 1. Logo image
 1. More language support for Core SDK
-1. Seamles integration with specific testing frameworks 
+1. Seamless integration with specific testing frameworks 
 
 ## Community
 * [Telegram group](https://t.me/visual_tracker)
+
+
