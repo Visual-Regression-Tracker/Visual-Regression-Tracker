@@ -53,7 +53,7 @@ New users and projects could be created via frontend app by default on http://lo
 Use implemented libraries to integrate with existing automated suites by adding assertions based on image comparison.
 We provide native integration with automation libraries, core SDK and Rest API interfaces that allow the system to be used with any existing programming language.
 
-## Native integration
+## Agents
 * [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
 
 ## Core SDK
