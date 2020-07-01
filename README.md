@@ -27,13 +27,27 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 
 ## Set up
 1. Install [Docker](https://docs.docker.com/get-docker/)
-1. Copy [docker-compose.yml](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/docker-compose.yml) and [.env](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/.env) in one folder
-1. Create folder for images `imageUploads`
-1. `$ docker-compose up`
-1. open http://localhost:8080
-1. Login with default user: `visual-regression-tracker@example.com/123456` and copy it's `apiKey`
-1. Create a new project and copy it's `projectId`
-1. See blow `Integration examples` how to send data to the service
+2. Copy [docker-compose.yml](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/docker-compose.yml)  
+
+`$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/docker-compose.yml -o docker-compose.yml`
+
+3. Copy [.env](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/.env) 
+
+`$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env -o .env`
+
+4. Create folder for images `imageUploads`
+
+`$ mkdir imageUploads`
+
+5. Start service
+
+`$ docker-compose up`
+
+Wait untill you see your creds printed.
+
+New users and projects could be created via frontend app by default on http://localhost:8080
+
+![Success setup](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/docker_setup_creds.png)
 
 ### Integration
 Use implemented libraries to integrate with existing automated suites by adding assertions based on image comparison.
@@ -60,5 +74,3 @@ Here you could find examples
 
 ## Community
 * [Telegram group](https://t.me/visual_tracker)
-
-
