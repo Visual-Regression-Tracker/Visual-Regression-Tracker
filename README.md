@@ -55,6 +55,7 @@ We provide native integration with automation libraries, core SDK and Rest API i
 
 ## Agents
 * [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
+* [Cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress)
 
 ## Core SDK
 Basic wrapper over API to be used for integration with existing tools
