@@ -64,13 +64,13 @@ Basic wrapper over API to be used for integration with existing tools
 
 ## Integration examples
 Here you could find examples 
-* [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js) - Playwright, core SDK
-* [Java](https://github.com/Visual-Regression-Tracker/examples-java) - Selenium WebDriver
+* [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js)
+* [Java](https://github.com/Visual-Regression-Tracker/examples-java)
 
 ## Contribution
 1. Try it, raise tickets with ideas, questions, bugs and share feedback :)
 1. Logo image
-1. More language support for Core SDK
+1. More language support for SDK
 1. Seamless integration with specific testing frameworks 
 
 ## Community
