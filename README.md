@@ -4,11 +4,6 @@ Open source, self hosted solution for visual testing and managing results of vis
 ## How it works
 Service receives images, performs pixel by pixel comparison with it’s previously accepted baseline and provides immediate results in order to catch unexpected changes. 
 
-## Getting started guide
-* [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright)
-* [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook)
-* [Selenide (Java)](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide)
-
 ## Features
 * **Automation framework independent** - no need to stick with specific automation tool, integrate with existing one
 * **Platform independent** - web, mobile, desktop etc. as long as you could make a screenshot
@@ -61,6 +56,12 @@ We provide native integration with automation libraries, core SDK and Rest API i
 Basic wrapper over API to be used for integration with existing tools
 * [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js)
 * [Java](https://github.com/Visual-Regression-Tracker/sdk-java)
+
+## Getting started guide
+* [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress)
+* [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright)
+* [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook)
+* [Selenide (Java)](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide)
 
 ## Integration examples
 Here you could find examples 
