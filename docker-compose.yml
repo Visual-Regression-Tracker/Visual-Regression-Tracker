@@ -9,7 +9,7 @@ services:
   api:
     image: visualregressiontracker/api:2.0.0
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
       JWT_LIFE_TIME: ${JWT_LIFE_TIME}
       IMG_UPLOAD_FOLDER: ${IMG_UPLOAD_FOLDER}
@@ -39,7 +39,7 @@ services:
   migration:
     image: visualregressiontracker/migration:2.0.0
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
       - postgres
 volumes:
