@@ -14,8 +14,8 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 * **Self-hosted** - keep your data save inside your intranet
 
 ## Glossary
-* TestVariation - unique identifier for Baseline, consists of Name + OS + Browser + Viewport
-* Baseline - validated and accepted image, latest baseline will be used as expected result in TestRun
+* TestVariation - historical record of Baselines by Name + Branch + OS + Browser + Viewport + Device, 
+* Baseline - validated and accepted image, latest will be used as expected result in TestRun
 * TestRun - result of comparing image against Baseline
 * Build - list of TestRuns
 * Project - list of Builds and TestVariations
