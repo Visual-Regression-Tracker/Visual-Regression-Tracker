@@ -73,9 +73,8 @@ Here you could find examples
 
 ## Contribution
 1. Try it, raise tickets with ideas, questions, bugs and share feedback :)
-1. Logo image
 1. More language support for SDK
-1. Seamless integration with specific testing frameworks 
+1. More integration with specific testing frameworks (agents)
 
 ## Community
 * [Telegram group](https://t.me/visual_tracker)
