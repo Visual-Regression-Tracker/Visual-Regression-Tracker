@@ -51,11 +51,13 @@ We provide native integration with automation libraries, core SDK and Rest API i
 ## Agents
 * [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
 * [Cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress)
+* [CodeceptJS](https://github.com/Visual-Regression-Tracker/agent-codeceptjs)
 
 ## Core SDK
 Basic wrapper over API to be used for integration with existing tools
 * [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js)
 * [Java](https://github.com/Visual-Regression-Tracker/sdk-java)
+* [Python](https://github.com/Visual-Regression-Tracker/sdk-python)
 
 ## Getting started guide
 * [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress)
@@ -67,6 +69,7 @@ Basic wrapper over API to be used for integration with existing tools
 Here you could find examples 
 * [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js)
 * [Java](https://github.com/Visual-Regression-Tracker/examples-java)
+* [Python](https://github.com/Visual-Regression-Tracker/examples-python)
 
 ## Contribution
 1. Try it, raise tickets with ideas, questions, bugs and share feedback :)
