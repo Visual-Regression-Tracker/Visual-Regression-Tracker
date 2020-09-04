@@ -60,6 +60,13 @@ Basic wrapper over API to be used for integration with existing tools
 * [Python](https://github.com/Visual-Regression-Tracker/sdk-python)
 
 ## Getting started guide
+
+### Videos
+
+* [How to set up on Remote machine via ssh](https://www.youtube.com/watch?v=cPsHeKnqL2M&feature=emb_logo)
+
+### Wiki
+
 * [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress)
 * [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright)
 * [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook)
