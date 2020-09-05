@@ -44,6 +44,14 @@ New users and projects could be created via frontend app by default on http://lo
 
 ![Success setup](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/docker_setup_creds.png)
 
+Using script (Unix based systems):
+
+1. Install [Docker](https://docs.docker.com/get-docker/)
+
+2. Make shell script executable: `$ chmod +x vrt-install.sh`
+
+3. Execute setuip script: `$ ./vrt-install.sh`
+
 ### Integration
 Use implemented libraries to integrate with existing automated suites by adding assertions based on image comparison.
 We provide native integration with automation libraries, core SDK and Rest API interfaces that allow the system to be used with any existing programming language.
