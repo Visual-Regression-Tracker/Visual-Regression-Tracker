@@ -84,4 +84,5 @@ Here you could find examples
 1. More integration with specific testing frameworks (agents)
 
 ## Community
+* [Twitter](https://twitter.com/VisualReTracker)
 * [Telegram group](https://t.me/visual_tracker)
