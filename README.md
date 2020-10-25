@@ -4,6 +4,8 @@ Open source, self hosted solution for visual testing and managing results of vis
 ## How it works
 Service receives images, performs pixel by pixel comparison with it’s previously accepted baseline and provides immediate results in order to catch unexpected changes. 
 
+![Demo](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/demo.gif)
+
 ## Features
 * **Automation framework independent** - no need to stick with specific automation tool, integrate with existing one
 * **Platform independent** - web, mobile, desktop etc. as long as you could make a screenshot
