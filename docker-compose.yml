@@ -6,6 +6,7 @@ services:
       - "${PORT}:8080"
     environment: 
       REACT_APP_API_URL: ${REACT_APP_API_URL}
+    restart: always
   api:
     image: visualregressiontracker/api:4.4.0
     environment:
@@ -23,6 +24,7 @@ services:
       - ./imageUploads:/${IMG_UPLOAD_FOLDER}
     depends_on:
       - postgres
+    restart: always
   postgres:
     image: postgres:12
     restart: always
@@ -35,13 +37,19 @@ services:
     expose:
       - "${POSTGRES_PORT}"
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - ./db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER"]
+      interval: 10s
+      timeout: 120s
+      retries: 10
+    restart: always
   migration:
     image: visualregressiontracker/migration:4.4.0
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
-      - postgres
-volumes:
-  postgres:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
     
