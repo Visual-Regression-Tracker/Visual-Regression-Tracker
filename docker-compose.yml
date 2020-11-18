@@ -45,7 +45,7 @@ services:
       retries: 10
     restart: always
   migration:
-    image: visualregressiontracker/migration:4.5.0
+    image: visualregressiontracker/migration:4.5.1
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
