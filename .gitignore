@@ -1,2 +1,5 @@
 imageUploads
 db
+
+*.cert
+*.key
