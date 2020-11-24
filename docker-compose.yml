@@ -1,14 +1,20 @@
 version: "3"
 services:
   ui:
-    image: visualregressiontracker/ui:4.5.0
+    image: visualregressiontracker/ui:4.6.0.3
     ports:
       - "${PORT}:8080"
+    # https config
+    #   - "443:443"
+    # volumes: 
+    #   - ./ssl/ssl.cert:/etc/nginx/secrets/ssl.cert
+    #   - ./ssl/ssl.key:/etc/nginx/secrets/ssl.key
+    #   - ./ssl/default.conf:/etc/nginx/conf.d/default.conf
     environment: 
       REACT_APP_API_URL: ${REACT_APP_API_URL}
     restart: always
   api:
-    image: visualregressiontracker/api:4.5.0
+    image: visualregressiontracker/api:4.6.0.5
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
@@ -18,10 +24,11 @@ services:
       BODY_PARSER_JSON_LIMIT: ${BODY_PARSER_JSON_LIMIT}
     ports:
       - "${APP_PORT}:3000"
-    expose:
-      - "${APP_PORT}"
     volumes:
       - ./imageUploads:/${IMG_UPLOAD_FOLDER}
+      # https config
+      # - ./ssl/ssl.cert:/secrets/ssl.cert
+      # - ./ssl/ssl.key:/secrets/ssl.key
     depends_on:
       - postgres
     restart: always
