@@ -23,6 +23,41 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 * Project - list of Builds and TestVariations
 
 ## Set up
+
+### Linux, macOS, WSL
+
+1. Install [Docker](https://docs.docker.com/get-docker/)
+2. Download the installation script
+
+```
+curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/vrt-install.sh
+chmod a+x vrt-install.sh
+```
+
+3. Run the installation script
+
+`./vrt-install.sh`
+
+#### Command line arguments
+
+`$ ./vrt-install.sh --help`
+
+```
+Installs the Visual Regression Tracker
+
+Usage: ./vrt-install.sh
+
+Arguments:
+    -h | --help
+    -a | --frontend-url <url>   Set the Front-end url. Default: http://localhost:8080
+    -r | --backend-url <url>    Set the API url. Default: http://localhost:4200
+    -i | --images-folder <dir>  Set the location of the image folder.
+                                Default: ./imagesFolder
+    --jwt-secret <secret>       Set the JWT secret. Default: randomly generated
+```
+
+### By Hand
+
 1. Install [Docker](https://docs.docker.com/get-docker/)
 2. Copy [docker-compose.yml](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/docker-compose.yml)  
 
@@ -32,11 +67,7 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 
 `$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env -o .env`
 
-4. Create folder for images `imageUploads`
-
-`$ mkdir imageUploads`
-
-5. Start service
+4. Start service
 
 `$ docker-compose up`
 
@@ -46,24 +77,16 @@ New users and projects could be created via frontend app by default on http://lo
 
 ![Success setup](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/docker_setup_creds.png)
 
-Using script (Unix based systems):
-
-1. Install [Docker](https://docs.docker.com/get-docker/)
-
-2. Make shell script executable: `$ chmod +x vrt-install.sh`
-
-3. Execute setuip script: `$ ./vrt-install.sh`
-
-### Integration
+## Integration
 Use implemented libraries to integrate with existing automated suites by adding assertions based on image comparison.
 We provide native integration with automation libraries, core SDK and Rest API interfaces that allow the system to be used with any existing programming language.
 
-## Agents
+### Agents
 * [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
 * [Cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress)
 * [CodeceptJS](https://github.com/Visual-Regression-Tracker/agent-codeceptjs)
 
-## Core SDK
+### Core SDK
 Basic wrapper over API to be used for integration with existing tools
 * [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js)
 * [Java](https://github.com/Visual-Regression-Tracker/sdk-java)
