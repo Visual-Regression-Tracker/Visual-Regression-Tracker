@@ -3,9 +3,8 @@
 DOCKER_URL=https://docs.docker.com/get-docker/
 DOCKER_COMPOSE_URL=https://docs.docker.com/compose/install/
 
-# TODO: point to master branch
-DOCKER_YML_URL=https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/feature/setup-as-shell/docker-compose.yml 
-DOCKER_ENV_URL=https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/feature/setup-as-shell/.env
+DOCKER_YML_URL=https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/docker-compose.yml 
+DOCKER_ENV_URL=https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env
 ENV_FILE=.env
 
 REACT_APP_API_URL=
