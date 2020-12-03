@@ -25,7 +25,7 @@ services:
     ports:
       - "${APP_PORT}:3000"
     volumes:
-      - ./imageUploads:/${IMG_UPLOAD_FOLDER}
+      - ./imageUploads:/imageUploads
       # https config
       # - ./ssl/ssl.cert:/secrets/ssl.cert
       # - ./ssl/ssl.key:/secrets/ssl.key
