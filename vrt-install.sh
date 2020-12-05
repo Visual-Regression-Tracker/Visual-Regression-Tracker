@@ -9,7 +9,6 @@ ENV_FILE=.env
 
 REACT_APP_API_URL=
 APP_FRONTEND_URL=
-IMG_UPLOAD_FOLDER=
 POSTGRES_FOLDER=
 JWT_SECRET=`cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
@@ -24,8 +23,6 @@ Arguments:
     -h | --help
     -a | --frontend-url <url>   Set the Front-end url. Default: http://localhost:8080
     -r | --backend-url <url>    Set the API url. Default: http://localhost:4200
-    -i | --images-folder <dir>  Set the location of the image folder.
-                                Default: ./imagesFolder
     --jwt-secret <secret>       Set the JWT secret. Default: randomly generated
 
 EOF
@@ -33,19 +30,17 @@ EOF
     exit 2
 }
 
-while getopts hr:a:i:d:-: flag
+while getopts hr:a:d:-: flag
 do
     case "${flag}" in
         \?|h) usage;;
         r) REACT_APP_API_URL=${OPTARG};;
         a) APP_FRONTEND_URL=${OPTARG};;
-        i) IMG_UPLOAD_FOLDER=${OPTARG};;
         -)
             case "${OPTARG}" in
                 help) usage;;
                 frontend-url) APP_FRONTEND_URL=${!OPTIND}; shift;;
                 backend-url) REACT_APP_API_URL=${!OPTIND}; shift;;
-                images-folder) IMG_UPLOAD_FOLDER=${!OPTIND}; shift;;
                 jwt-secret) JWT_SECRET=${!OPTIND}; shift;;
                 *)
                     echo "Illegal option: ${OPTARG}"
@@ -78,31 +73,28 @@ echo " "
 echo Applying configuration
 if [[ ! -z "${REACT_APP_API_URL}" ]]; then
     echo Backend API URL: $REACT_APP_API_URL
-    sed -i "s~^[#]*\s*REACT_APP_API_URL=.*~REACT_APP_API_URL=${REACT_APP_API_URL}~" $ENV_FILE
+    sed -ir "s~^[#]*\s*REACT_APP_API_URL=.*~REACT_APP_API_URL=${REACT_APP_API_URL}~" $ENV_FILE
 
     APP_PORT=`echo "$REACT_APP_API_URL" | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9],,g'`
     echo Backend API port: ${APP_PORT:-80}
-    sed -i "s~^[#]*\s*APP_PORT=.*~APP_PORT=${APP_PORT:-80}~" $ENV_FILE
+    sed -ir "s~^[#]*\s*APP_PORT=.*~APP_PORT=${APP_PORT:-80}~" $ENV_FILE
 fi
 
 if [[ ! -z "${APP_FRONTEND_URL}" ]]; then
     echo Frontend URL: $APP_FRONTEND_URL
-    sed -i "s~^[#]*\s*APP_FRONTEND_URL=.*~APP_FRONTEND_URL=${APP_FRONTEND_URL}~" $ENV_FILE
+    sed -ir "s~^[#]*\s*APP_FRONTEND_URL=.*~APP_FRONTEND_URL=${APP_FRONTEND_URL}~" $ENV_FILE
 
     PORT=`echo "$APP_FRONTEND_URL" | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9],,g'`
     echo Frontend port: ${PORT:-80}
-    sed -i "s~^[#]*\s*PORT=.*~PORT=${PORT:-80}~" $ENV_FILE
-fi
-
-if [[ ! -z "${IMG_UPLOAD_FOLDER}" ]]; then
-    echo Images upload folder: $IMG_UPLOAD_FOLDER
-    sed -i "s~^[#]*\s*IMG_UPLOAD_FOLDER=.*~IMG_UPLOAD_FOLDER=${IMG_UPLOAD_FOLDER}~" $ENV_FILE
+    sed -ir "s~^[#]*\s*PORT=.*~PORT=${PORT:-80}~" $ENV_FILE
 fi
 
 if [[ ! -z "${JWT_SECRET}" ]]; then
     echo JWT secret: $JWT_SECRET
-    sed -i "s~^[#]*\s*JWT_SECRET=.*~JWT_SECRET=${JWT_SECRET}~" $ENV_FILE
+    sed -ir "s~^[#]*\s*JWT_SECRET=.*~JWT_SECRET=${JWT_SECRET}~" $ENV_FILE
 fi
+
+rm -f .envr
 
 echo " "
 echo Starting docker

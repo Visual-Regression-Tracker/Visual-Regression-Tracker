@@ -40,8 +40,6 @@ chmod a+x vrt-install.sh
 
 #### Command line arguments
 
-`$ ./vrt-install.sh --help`
-
 ```
 Installs the Visual Regression Tracker
 
@@ -51,8 +49,6 @@ Arguments:
     -h | --help
     -a | --frontend-url <url>   Set the Front-end url. Default: http://localhost:8080
     -r | --backend-url <url>    Set the API url. Default: http://localhost:4200
-    -i | --images-folder <dir>  Set the location of the image folder.
-                                Default: ./imagesFolder
     --jwt-secret <secret>       Set the JWT secret. Default: randomly generated
 ```
 
