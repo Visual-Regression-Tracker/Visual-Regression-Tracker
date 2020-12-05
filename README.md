@@ -30,7 +30,7 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 2. Download the installation script
 
 ```
-curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/vrt-install.sh
+curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/vrt-install.sh -o vrt-install.sh
 chmod a+x vrt-install.sh
 ```
 
