@@ -98,24 +98,4 @@ rm -f .envr
 
 echo " "
 echo Starting docker
-docker-compose up --detach
-
-echo " "
-echo Waiting for VRT to start
-docker-compose logs --follow | grep -q -m 1 'The Api key is'
-API_KEY=`docker-compose logs | grep 'The Api key is' | sed -e 's,^.*: ,,g'`
-
-echo " "
-echo Populating vrt.json
-. $ENV_FILE
-cat << EOF > vrt.json
-{
-    "apiUrl": "${REACT_APP_API_URL}",
-    "apiKey": "${API_KEY}",
-    "project": "Default project",
-    "branchName": "master"
-}
-EOF
-
-echo " "
-echo "Done."
+docker-compose up 
