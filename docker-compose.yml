@@ -1,7 +1,7 @@
 version: "3"
 services:
   ui:
-    image: visualregressiontracker/ui:4.7.0
+    image: visualregressiontracker/ui:4.7.1
     ports:
       - "${PORT}:8080"
     # https config
@@ -51,7 +51,7 @@ services:
       retries: 10
     restart: always
   migration:
-    image: visualregressiontracker/migration:4.6.0
+    image: visualregressiontracker/migration:4.7.0
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
