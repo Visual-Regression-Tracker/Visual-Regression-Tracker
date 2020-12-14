@@ -1,7 +1,7 @@
 version: "2.1"
 services:
   ui:
-    image: visualregressiontracker/ui:4.6.0
+    image: visualregressiontracker/ui:4.7.1
     ports:
       - "${PORT}:8080"
     # https config
@@ -14,18 +14,17 @@ services:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
     restart: always
   api:
-    image: visualregressiontracker/api:4.6.0
+    image: visualregressiontracker/api:4.7.0
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
       JWT_LIFE_TIME: ${JWT_LIFE_TIME}
-      IMG_UPLOAD_FOLDER: ${IMG_UPLOAD_FOLDER}
       APP_FRONTEND_URL: ${APP_FRONTEND_URL}
       BODY_PARSER_JSON_LIMIT: ${BODY_PARSER_JSON_LIMIT}
     ports:
       - "${APP_PORT}:3000"
     volumes:
-      - ./imageUploads:/${IMG_UPLOAD_FOLDER}
+      - ./imageUploads:/imageUploads
       # https config
       # - ./ssl/ssl.cert:/secrets/ssl.cert
       # - ./ssl/ssl.key:/secrets/ssl.key
@@ -52,7 +51,7 @@ services:
       retries: 10
     restart: always
   migration:
-    image: visualregressiontracker/migration:4.6.0
+    image: visualregressiontracker/migration:4.7.0
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
