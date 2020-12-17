@@ -87,6 +87,7 @@ Basic wrapper over API to be used for integration with existing tools
 * [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js)
 * [Java](https://github.com/Visual-Regression-Tracker/sdk-java)
 * [Python](https://github.com/Visual-Regression-Tracker/sdk-python)
+* [Dotnet](https://github.com/Visual-Regression-Tracker/sdk-dotnet)
 
 ## Getting started guide
 
@@ -106,6 +107,7 @@ Here you could find examples
 * [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js)
 * [Java](https://github.com/Visual-Regression-Tracker/examples-java)
 * [Python](https://github.com/Visual-Regression-Tracker/examples-python)
+* [Dotnet](https://github.com/Visual-Regression-Tracker/examples-dotnet)
 
 ## Contribution
 1. Try it, raise tickets with ideas, questions, bugs and share feedback :)
