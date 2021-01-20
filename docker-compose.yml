@@ -49,7 +49,6 @@ services:
       interval: 10s
       timeout: 120s
       retries: 10
-    restart: always
   migration:
     image: visualregressiontracker/migration:4.8.0
     environment:
