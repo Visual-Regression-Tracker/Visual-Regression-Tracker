@@ -1,5 +1,14 @@
-# Visual Regression Tracker
-Open source, self hosted solution for visual testing and managing results of visual testing. 
+<p align="center">
+  <img src="./public/logo.png"/ width='200px' alt="Visual Regression Tracker logo">
+</p>
+
+<h1 align="center"> Visual Regression Tracker </h1>
+<h3 align="center"> Open source, self hosted solution for visual testing and managing results of visual testing. </h3>
+
+## Hello 
+* Take [1-minute survey](https://forms.gle/DidGSodojQ4Qn4is6) to help us priorities tasks better ❤️
+* [Twitter](https://twitter.com/VisualReTracker)
+* [Telegram group](https://t.me/visual_tracker)
 
 ## How it works
 Service receives images, performs pixel by pixel comparison with it’s previously accepted baseline and provides immediate results in order to catch unexpected changes. 
@@ -113,7 +122,3 @@ Here you could find examples
 1. Try it, raise tickets with ideas, questions, bugs and share feedback :)
 1. More language support for SDK
 1. More integration with specific testing frameworks (agents)
-
-## Community
-* [Twitter](https://twitter.com/VisualReTracker)
-* [Telegram group](https://t.me/visual_tracker)
