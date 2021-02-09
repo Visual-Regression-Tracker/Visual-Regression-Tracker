@@ -20,7 +20,7 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 * **Platform independent** - web, mobile, desktop etc. as long as you could make a screenshot
 * **Baseline history** - track how baseline image changed since the beginning
 * **Ignore regions** - improve stability by ignoring not important or not controllable parts of image
-* **Language support** - JS, Java or any other via REST API (need more?)
+* **Language support** - JS, Java, Python, .Net or any other via REST API (need more?)
 * **Easy setup** - everything is inside Docker images
 * **Self-hosted** - keep your data save inside your intranet
 
