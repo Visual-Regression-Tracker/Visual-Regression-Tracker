@@ -22,6 +22,16 @@
       "contributions": [
         "plugin"
       ]
+    },
+    {
+      "login": "suratdas",
+      "name": "Surat Das",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9042580?v=4",
+      "profile": "https://github.com/suratdas",
+      "contributions": [
+        "code",
+        "plugin"
+      ]
     }
   ],
   "contributorsPerLine": 7,
