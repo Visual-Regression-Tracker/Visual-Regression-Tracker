@@ -13,10 +13,7 @@
       "contributions": [
         "code",
         "business",
-        "doc",
-        "tutorial",
         "ideas",
-        "infra",
         "plugin"
       ]
     },
@@ -26,7 +23,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/457807?v=4",
       "profile": "https://github.com/dcrowe",
       "contributions": [
-        "plugin"
+        "plugin",
+        "review"
       ]
     },
     {
