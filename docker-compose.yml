@@ -14,7 +14,7 @@ services:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
     restart: always
   api:
-    image: visualregressiontracker/api:4.11.0
+    image: visualregressiontracker/api:4.11.1
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
@@ -51,7 +51,7 @@ services:
       timeout: 120s
       retries: 10
   migration:
-    image: visualregressiontracker/migration:4.11.0
+    image: visualregressiontracker/migration:4.11.1
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
