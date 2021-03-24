@@ -63,6 +63,15 @@
       "contributions": [
         "plugin"
       ]
+    },
+    {
+      "login": "dekaravanhoc",
+      "name": "Dekara VanHoc",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50260825?v=4",
+      "profile": "https://github.com/dekaravanhoc",
+      "contributions": [
+        "plugin"
+      ]
     }
   ],
   "contributorsPerLine": 7,
