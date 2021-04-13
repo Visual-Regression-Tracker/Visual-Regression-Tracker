@@ -1,7 +1,7 @@
 version: "2.1"
 services:
   ui:
-    image: visualregressiontracker/ui:4.12.0
+    image: visualregressiontracker/ui:release-v4.13.0-rc1
     ports:
       - "${PORT}:8080"
     # https config
@@ -14,7 +14,7 @@ services:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
     restart: always
   api:
-    image: visualregressiontracker/api:4.12.0
+    image: visualregressiontracker/api:release-api-v4.13.0-rc2
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
@@ -33,7 +33,7 @@ services:
       - postgres
     restart: always
   migration:
-    image: visualregressiontracker/migration:4.12.0
+    image: visualregressiontracker/migration:release-migration-v4.13.0-rc3
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
