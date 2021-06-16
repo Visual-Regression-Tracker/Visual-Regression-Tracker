@@ -81,6 +81,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AaronChelvan",
+      "name": "Aaron Chelvan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16505870?v=4",
+      "profile": "https://github.com/AaronChelvan",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
