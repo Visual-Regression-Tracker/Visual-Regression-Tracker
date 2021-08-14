@@ -32,7 +32,7 @@ services:
       - postgres
     restart: always
   migration:
-    image: visualregressiontracker/migration:4.17.0 
+    image: visualregressiontracker/migration:4.17.0
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     depends_on:
