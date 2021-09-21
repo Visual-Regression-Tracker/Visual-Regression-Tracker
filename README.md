@@ -72,11 +72,15 @@ Arguments:
 
 `$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env -o .env`
 
-4. Start service
+4. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name.
+
+5. Start service
 
 `$ docker-compose up`
 
-Wait untill you see your creds printed.
+6. In some OS, you may see an error `Exiting: error loading config file: config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`. In that case, press Ctrl+C, and follow instructions at https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html Once done, run `$ docker-compose up` again.
+
+Wait until you see your creds printed.
 
 New users and projects could be created via frontend app by default on http://localhost:8080
 
