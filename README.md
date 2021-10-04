@@ -33,17 +33,21 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 
 ## Set up
 
+Use any of the below ways to setup the server. [Docker](https://docs.docker.com/get-docker/) has to be installed on the machine.
+
+<details>
+<summary>Quick Setup</summary>
+
 ### Linux, macOS, WSL
 
-1. Install [Docker](https://docs.docker.com/get-docker/)
-2. Download the installation script
+1. Download the installation script
 
 ```
 curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/vrt-install.sh -o vrt-install.sh
 chmod a+x vrt-install.sh
 ```
 
-3. Run the installation script
+2. Run the installation script
 
 `./vrt-install.sh`
 
@@ -60,31 +64,48 @@ Arguments:
     -r | --backend-url <url>    Set the API url. Default: http://localhost:4200
     --jwt-secret <secret>       Set the JWT secret. Default: randomly generated
 ```
+</details>
 
-### By Hand
+<details>
+<summary>Manual Setup</summary>
 
-1. Install [Docker](https://docs.docker.com/get-docker/)
-2. Copy [docker-compose.yml](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/docker-compose.yml)  
+1. Copy [docker-compose.yml](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/docker-compose.yml)  
 
 `$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/docker-compose.yml -o docker-compose.yml`
 
-3. Copy [.env](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/.env) 
+2. Copy [.env](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/.env) 
 
 `$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env -o .env`
 
-4. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name.
+3. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name.
 
-5. Start service
+4. Start service
 
 `$ docker-compose up`
 
-6. In some OS, you may see an error `Exiting: error loading config file: config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`. In that case, press Ctrl+C, and follow instructions at https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html Once done, run `$ docker-compose up` again.
 
 Wait until you see your creds printed.
 
 New users and projects could be created via frontend app by default on http://localhost:8080
 
 ![Success setup](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/docker_setup_creds.png)
+</details>
+
+<details>
+<summary>Run VRT with logging enabled in Elasticsearch</summary>
+
+This is for the users who want to monitor VRT logs via Kibana. It is expected to have basic knowledge of Elastic stack (especially Kibana) for the admin so that the logs can be managed and dashboards created in Kibana. 
+Since logging will be retained by elasticsearch, it will consume a little more memory and CPU. If you see error in the console, please consult elasticsearch documentation.  
+It is recommended to run the program as root user which will ensure permission and ownership related issues will not have to be dealt with.
+
+1. Clone or download this repository.  
+2. Move to the downloaded/cloned repository. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name.
+3. Start service by giving below command.
+
+`$ docker-compose -f docker-compose.yml -f docker-compose.logging.yml up`
+
+4. If you are not using root user, in some OS, you may see an error `Exiting: error loading config file: config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`. In that case, press Ctrl+C, and follow [Elasticsearch instructions](https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html). Once done, start the service again.
+</details>
 
 ## Integration
 Use implemented libraries to integrate with existing automated suites by adding assertions based on image comparison.
