@@ -1,0 +1,61 @@
+filebeat.inputs:
+- type: container
+  paths:
+    - '/var/lib/docker/containers/*/*.log'
+    - '~/Library/Containers/com.docker.docker/Data/*/*.log'
+  multiline:
+    pattern: '^[[:space:]]+(at|\.{3})\b|^Caused by:'
+    match: after
+    negate: false
+
+processors:
+- add_docker_metadata:
+    host: "unix:///var/run/docker.sock"
+
+- decode_json_fields:
+    fields: ["message"]
+    target: "json"
+    overwrite_keys: true
+
+- drop_event:
+    when:
+      not:
+        or:
+          - contains:
+              container.image.name: "visualregressiontracker/ui"
+          - contains:
+              container.image.name: "visualregressiontracker/api"
+          - contains:
+              container.image.name: "postgres"
+          - contains:
+              container.image.name: "visualregressiontracker/migration"
+
+- dissect:
+    when:
+      contains:
+        message: "VRTUserLogService"
+    tokenizer: '%{vrtPrependValue}VRTUserLogService] %{vrtEventType} ## %{vrtUser} ## %{vrtMessage}'
+    target_prefix: ""
+    ignore_failure: true
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  indices:
+    - index: "vrt-user-log"
+      when.contains:
+        message: "VRTUserLogService"
+    - index: "vrt-ui"
+      when.contains:
+        container.image.name: "visualregressiontracker/ui"
+    - index: "vrt-api"
+      when.contains:
+        container.image.name: "visualregressiontracker/api"
+    - index: "vrt-postgres"
+      when.contains:
+        container.image.name: "postgres"
+    - index: "vrt-migration"
+      when.contains:
+        container.image.name: "visualregressiontracker/migration"
+
+logging.json: true
+logging.metrics.enabled: false
