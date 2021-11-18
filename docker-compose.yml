@@ -15,6 +15,7 @@ services:
     #   - ./ssl/nginx.conf:/etc/nginx/nginx.conf
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
+      VRT_VERSION: ${VRT_VERSION}
     restart: always
   api:
     image: visualregressiontracker/api:${VRT_VERSION}
@@ -24,6 +25,7 @@ services:
       JWT_LIFE_TIME: ${JWT_LIFE_TIME}
       APP_FRONTEND_URL: ${APP_FRONTEND_URL}
       BODY_PARSER_JSON_LIMIT: ${BODY_PARSER_JSON_LIMIT}
+      ELASTIC_URL: ${ELASTIC_URL}
     ports:
       - "${APP_PORT}:3000"
     volumes:
