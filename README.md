@@ -77,7 +77,7 @@ Arguments:
 
 `$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env -o .env`
 
-3. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name.
+3. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
 
 4. Start service
 
@@ -95,14 +95,19 @@ New users and projects could be created via frontend app by default on http://lo
 <summary>Run VRT with logging enabled in Elasticsearch</summary>
 
 This is for the users who want to monitor VRT logs via Kibana. It is expected to have basic knowledge of Elastic stack (especially Kibana) for the admin so that the logs can be managed and dashboards created in Kibana. 
-Since logging will be retained by elasticsearch, it will consume a little more memory and CPU. If you see error in the console, please consult elasticsearch documentation.  
-It is recommended to run the program as root user which will ensure permission and ownership related issues will not have to be dealt with.
+Since logging will be retained by Elasticsearch, it will consume a little more memory and CPU. If you see error in the console, please consult Elasticsearch documentation.
+
+_**It is recommended to run the program as root user which will ensure permission and ownership related issues will not have to be dealt with.**_
 
 1. Clone or download this repository.  
-2. Move to the downloaded/cloned repository. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name.
-3. Start service by giving below command.
+2. Move to the downloaded/cloned repository. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
+3. Follow either of below sub steps.  
+   - If your organization does not have Elasticsearch server running or if you want to start Elastic stack on your own, start service by giving below command.
+  
+     `$ docker-compose -f docker-compose.yml -f docker-compose.elastic.logging.yml up`
+   - If you want to re-use the already running Elasticsearch server in your organization, go to `filebeat/config/filebeat.yml` and edit hosts to point to the Elasticsearch server. Also, point ELASTIC_URL to this server in .env file. Start service by giving below command.
 
-`$ docker-compose -f docker-compose.yml -f docker-compose.logging.yml up`
+     `$ docker-compose -f docker-compose.yml -f docker-compose.logging.yml up`
 
 4. If you are not using root user, in some OS, you may see an error `Exiting: error loading config file: config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`. In that case, press Ctrl+C, and follow [Elasticsearch instructions](https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html). Once done, start the service again.
 </details>
