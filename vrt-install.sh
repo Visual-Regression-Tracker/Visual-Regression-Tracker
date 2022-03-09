@@ -10,7 +10,7 @@ ENV_FILE=.env
 REACT_APP_API_URL=
 APP_FRONTEND_URL=
 POSTGRES_FOLDER=
-JWT_SECRET=`cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+JWT_SECRET=`cat /dev/urandom | env LC_CTYPE=en.US.UTF-8 tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
 usage()
 {
