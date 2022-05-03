@@ -1,3 +1,5 @@
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg)](https://stand-with-ukraine.pp.ua)
+
 <p align="center">
   <img src="./public/logo.png"/ width='200px' alt="Visual Regression Tracker logo">
 </p>
