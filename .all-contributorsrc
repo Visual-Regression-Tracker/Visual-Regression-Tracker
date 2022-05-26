@@ -127,6 +127,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vkostromin94",
+      "name": "vkostromin94",
+      "avatar_url": "https://avatars.githubusercontent.com/u/80275969?v=4",
+      "profile": "https://github.com/vkostromin94",
+      "contributions": [
+        "plugin"
+      ]
     }
   ],
   "contributorsPerLine": 7,
