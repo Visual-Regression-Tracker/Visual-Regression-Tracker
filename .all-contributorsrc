@@ -173,6 +173,15 @@
       "contributions": [
         "plugin"
       ]
+    },
+    {
+      "login": "nitschSB",
+      "name": "nitschSB",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39341455?v=4",
+      "profile": "https://github.com/nitschSB",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -180,5 +189,6 @@
   "projectOwner": "Visual-Regression-Tracker",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
