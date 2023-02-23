@@ -25,6 +25,7 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 * **Language support** - JS, Java, Python, .Net or any other via REST API (need more?)
 * **Easy setup** - everything is inside Docker images
 * **Self-hosted** - keep your data save inside your intranet
+* **Can compare PDF too** - use standalone jar to compare pdf and images from a folder
 
 ## Glossary
 * TestVariation - historical record of Baselines by Name + Branch + OS + Browser + Viewport + Device, 
@@ -143,6 +144,7 @@ Basic wrapper over API to be used for integration with existing tools
 * [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook)
 * [Selenide (Java)](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide)
 * [Jenkins VRT result publishing example (with JAVA SDK)](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-publish-VRT-result-in-jenkins)
+* [Compare image and pdf files as CLI](https://github.com/Visual-Regression-Tracker/examples-java/tree/master/standalone-from-folder-maven)
 
 ## Integration examples
 Here you could find examples 
