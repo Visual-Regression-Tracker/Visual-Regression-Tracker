@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3.8" # Docker Engine minimum version 19.03.0
 
 services:
   ui:
@@ -16,7 +16,7 @@ services:
     #   - ./ssl/nginx.conf:/etc/nginx/nginx.conf
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
-      VRT_VERSION: ${VRT_VERSION}
+      VRT_VERSION: ${VRT_VERSION} # FIXME: What is this version?
     restart: always
   api:
     image: visualregressiontracker/api:${VRT_API_VERSION}

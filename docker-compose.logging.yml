@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3.8" # Docker Engine minimum version 19.03.0
 
 services:
   filebeat:
