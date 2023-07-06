@@ -35,7 +35,8 @@ services:
       # - ./ssl/ssl.cert:/secrets/ssl.cert
       # - ./ssl/ssl.key:/secrets/ssl.key
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     restart: always
   migration:
     image: visualregressiontracker/migration:${VRT_MIGRATION_VERSION}
