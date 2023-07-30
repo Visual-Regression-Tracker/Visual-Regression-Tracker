@@ -47,7 +47,7 @@ services:
         condition: service_healthy
     restart: on-failure
   postgres:
-    image: postgres:12
+    image: postgres:15.3-alpine3.18
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -64,4 +64,3 @@ services:
       interval: 10s
       timeout: 120s
       retries: 10
-
