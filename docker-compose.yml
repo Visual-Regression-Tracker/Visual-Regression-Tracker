@@ -17,6 +17,7 @@ services:
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
       VRT_VERSION: ${VRT_UI_VERSION}
+      PORT: ${PORT}
     restart: always
   api:
     image: visualregressiontracker/api:${VRT_API_VERSION}
