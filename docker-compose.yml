@@ -47,7 +47,7 @@ services:
         condition: service_healthy
     restart: on-failure
   postgres:
-    image: postgres:15.3-alpine3.18
+    image: postgres:12
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -64,3 +64,13 @@ services:
       interval: 10s
       timeout: 120s
       retries: 10
+  # pgadmin:
+  #   image: dpage/pgadmin4:7.4
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   ports:
+  #     - "5050:80"
+  #   depends_on:
+  #     - postgres
