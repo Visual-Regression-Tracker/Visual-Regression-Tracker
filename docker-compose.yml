@@ -17,6 +17,7 @@ services:
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
       VRT_VERSION: ${VRT_UI_VERSION}
+      PORT: ${PORT}
     restart: always
   api:
     image: visualregressiontracker/api:${VRT_API_VERSION}
@@ -64,4 +65,13 @@ services:
       interval: 10s
       timeout: 120s
       retries: 10
-
+  # pgadmin:
+  #   image: dpage/pgadmin4:7.4
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   ports:
+  #     - "5050:80"
+  #   depends_on:
+  #     - postgres
