@@ -123,6 +123,7 @@ We provide native integration with automation libraries, core SDK and Rest API i
 * [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
 * [Cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress)
 * [CodeceptJS](https://github.com/Visual-Regression-Tracker/agent-codeceptjs)
+* [Robot Framework](https://github.com/NiceProjectPoland/robotframework-VRTLibrary)
 
 ### Core SDK
 Basic wrapper over API to be used for integration with existing tools
