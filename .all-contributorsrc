@@ -202,6 +202,15 @@
         "plugin",
         "code"
       ]
+    },
+    {
+      "login": "s-weigand",
+      "name": "Sebastian Weigand",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9513634?v=4",
+      "profile": "https://github.com/s-weigand",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
