@@ -220,6 +220,15 @@
       "contributions": [
         "plugin"
       ]
+    },
+    {
+      "login": "groinder",
+      "name": "Krzysztof Przybylski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16709010?v=4",
+      "profile": "https://github.com/groinder",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
