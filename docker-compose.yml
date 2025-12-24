@@ -1,5 +1,3 @@
-version: "3.8" # Docker Engine minimum version 19.03.0
-
 services:
   ui:
     image: visualregressiontracker/ui:${VRT_UI_VERSION}
@@ -43,8 +41,11 @@ services:
       LDAP_ATTRIBUTE_LAST_NAME: ${LDAP_ATTRIBUTE_LAST_NAME}
       LDAP_ATTRIBUTE_FIRST_NAME: ${LDAP_ATTRIBUTE_FIRST_NAME}
       LDAP_ATTRIBUTE_MAIL: ${LDAP_ATTRIBUTE_MAIL}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
     ports:
       - "${APP_PORT}:3000"
+    extra_hosts:
+      - host.docker.internal:host-gateway
     volumes:
       - ./imageUploads:/imageUploads
       # https config

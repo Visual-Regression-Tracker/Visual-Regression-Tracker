@@ -27,6 +27,26 @@ Service receives images, performs pixel by pixel comparison with it’s previous
 * **Self-hosted** - keep your data save inside your intranet
 * **Can compare PDF too** - use standalone jar to compare pdf and images from a folder
 
+## Image Comparison Providers
+
+Visual Regression Tracker supports multiple image comparison algorithms, each with different strengths and use cases:
+
+### Available Providers
+
+* **Pixelmatch** - Fast pixel-by-pixel comparison algorithm. Default comparison method. Best for detecting exact pixel differences.
+  * Library: [pixelmatch](https://github.com/mapbox/pixelmatch)
+  
+* **Looks-Same** - Perceptual image comparison that considers human visual perception. Good for ignoring minor rendering differences.
+  * Library: [looks-same](https://github.com/gemini-testing/looks-same)
+  
+* **Odiff** - Advanced diff tool with layout detection and anti-aliasing support. Useful for detecting layout shifts.
+  * Library: [odiff-bin](https://github.com/dmtrKovalenko/odiff)
+  
+* **VLM (Vision Language Model)** - Hybrid comparison combining pixelmatch with AI-powered human-noticeability analysis using Vision Language Models. Analyzes if differences are actually noticeable to humans.
+  * Documentation: [VLM README](https://github.com/Visual-Regression-Tracker/backend/blob/master/src/compare/libs/vlm/README.md)
+
+You can configure which comparison provider to use per project in the project settings.
+
 ## Glossary
 * TestVariation - historical record of Baselines by Name + Branch + OS + Browser + Viewport + Device, 
 * Baseline - validated and accepted image, latest will be used as expected result in TestRun
