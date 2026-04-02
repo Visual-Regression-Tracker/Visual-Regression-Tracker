@@ -59,6 +59,9 @@ services:
     image: visualregressiontracker/migration:${VRT_MIGRATION_VERSION}
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      DEFAULT_USER_EMAIL: ${DEFAULT_USER_EMAIL}
+      DEFAULT_USER_PASSWORD: ${DEFAULT_USER_PASSWORD}
+      DEFAULT_USER_API_KEY: ${DEFAULT_USER_API_KEY}
     depends_on:
       postgres:
         condition: service_healthy
