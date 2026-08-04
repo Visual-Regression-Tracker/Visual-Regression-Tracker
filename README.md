@@ -9,7 +9,6 @@
 
 ## Hello 
 * Take [1-minute survey](https://forms.gle/DidGSodojQ4Qn4is6) to help us priorities tasks better ❤️
-* [Twitter](https://twitter.com/VisualReTracker)
 * [Telegram group](https://t.me/visual_tracker)
 
 ## How it works
