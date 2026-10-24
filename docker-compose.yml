@@ -16,6 +16,7 @@ services:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
       VRT_VERSION: ${VRT_UI_VERSION}
       PORT: ${PORT}
+      REACT_APP_OIDC_AUTO_REDIRECT: ${REACT_APP_OIDC_AUTO_REDIRECT:-false}
     restart: always
   api:
     image: visualregressiontracker/api:${VRT_API_VERSION}
@@ -41,6 +42,21 @@ services:
       LDAP_ATTRIBUTE_LAST_NAME: ${LDAP_ATTRIBUTE_LAST_NAME}
       LDAP_ATTRIBUTE_FIRST_NAME: ${LDAP_ATTRIBUTE_FIRST_NAME}
       LDAP_ATTRIBUTE_MAIL: ${LDAP_ATTRIBUTE_MAIL}
+      # defaults mirror the API's: an empty value would override them
+      OIDC_ENABLED: ${OIDC_ENABLED:-false}
+      OIDC_ISSUER_URL: ${OIDC_ISSUER_URL:-}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI:-http://localhost:4200/users/oidc/callback}
+      OIDC_SCOPES: ${OIDC_SCOPES:-openid profile email}
+      OIDC_ATTRIBUTE_MAIL: ${OIDC_ATTRIBUTE_MAIL:-email}
+      OIDC_ATTRIBUTE_FIRST_NAME: ${OIDC_ATTRIBUTE_FIRST_NAME:-given_name}
+      OIDC_ATTRIBUTE_LAST_NAME: ${OIDC_ATTRIBUTE_LAST_NAME:-family_name}
+      OIDC_ROLE_CLAIM: ${OIDC_ROLE_CLAIM:-groups}
+      OIDC_ADMIN_VALUES: ${OIDC_ADMIN_VALUES:-vrt-admin,admin}
+      OIDC_DEFAULT_ROLE: ${OIDC_DEFAULT_ROLE:-editor}
+      OIDC_REQUIRE_VERIFIED_EMAIL: ${OIDC_REQUIRE_VERIFIED_EMAIL:-true}
+      OIDC_TLS_NO_VERIFY: ${OIDC_TLS_NO_VERIFY:-false}
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
     ports:
       - "${APP_PORT}:3000"
