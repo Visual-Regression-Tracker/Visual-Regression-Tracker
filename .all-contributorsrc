@@ -247,6 +247,98 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "adabru",
+      "name": "Adam Brunnmeier",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6108978?v=4",
+      "profile": "https://adabru.de",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "okstryzhak",
+      "name": "Oksana Stryzhak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/117097798?v=4",
+      "profile": "https://github.com/okstryzhak",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Octember",
+      "name": "Noah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/667653?v=4",
+      "profile": "https://bevyl.ai",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mokhtardziri",
+      "name": "mokhtardziri",
+      "avatar_url": "https://avatars.githubusercontent.com/u/267088220?v=4",
+      "profile": "https://github.com/mokhtardziri",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Roman1137",
+      "name": "Roman1137",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32763749?v=4",
+      "profile": "https://github.com/Roman1137",
+      "contributions": [
+        "plugin",
+        "doc"
+      ]
+    },
+    {
+      "login": "tchiaspko",
+      "name": "Tony Chia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49214278?v=4",
+      "profile": "https://github.com/tchiaspko",
+      "contributions": [
+        "code",
+        "example"
+      ]
+    },
+    {
+      "login": "dortizesquivel",
+      "name": "dortizesquivel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1325218?v=4",
+      "profile": "https://github.com/dortizesquivel",
+      "contributions": [
+        "infra"
+      ]
+    },
+    {
+      "login": "shankybnl",
+      "name": "Shanky Sharma",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11002110?v=4",
+      "profile": "https://www.linkedin.com/in/shankysharma/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rschmidt-webit",
+      "name": "rschmidt-webit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/128089901?v=4",
+      "profile": "https://github.com/rschmidt-webit",
+      "contributions": [
+        "example"
+      ]
+    },
+    {
+      "login": "stp4k",
+      "name": "Stepan Churakov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29662401?v=4",
+      "profile": "https://github.com/stp4k",
+      "contributions": [
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
