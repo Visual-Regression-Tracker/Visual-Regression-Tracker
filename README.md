@@ -126,7 +126,7 @@ Since 6.0, the API and migration images run as uid 1000 instead of root, and din
 sudo chown -R 1000:1000 ./imageUploads ./ssl
 ```
 
-Otherwise the API stops with `… is not writable by uid 1000 (EACCES): chown -R 1000:1000 …`. `vrt-install.sh` does this for `./imageUploads`. A new named Docker volume instead of the bind mount needs nothing. The UI keeps reading the same folder.
+Otherwise the API stops with `… is not writable by uid 1000 (EACCES): chown -R 1000:1000 …`. `vrt-install.sh` does this for `./imageUploads`. On macOS with Docker Desktop the chown is not needed. A new named Docker volume instead of the bind mount needs nothing. The UI keeps reading the same folder.
 </details>
 
 <details>
