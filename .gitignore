@@ -1,7 +1,5 @@
 imageUploads
 db
-db-pg*
-vrt-pg*.dump
 
 *.cert
 *.key
