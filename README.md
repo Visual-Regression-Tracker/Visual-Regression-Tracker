@@ -99,7 +99,7 @@ Arguments:
 
 `$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env -o .env`
 
-3. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
+3. In .env file, set JWT_SECRET to a random value (`openssl rand -hex 32`); the API does not start without one. Ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
 
 4. Start service
 
@@ -122,7 +122,7 @@ Since logging will be retained by Elasticsearch, it will consume a little more m
 _**It is recommended to run the program as root user which will ensure permission and ownership related issues will not have to be dealt with.**_
 
 1. Clone or download this repository.  
-2. Move to the downloaded/cloned repository. In .env file, ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
+2. Move to the downloaded/cloned repository. In .env file, set JWT_SECRET to a random value (`openssl rand -hex 32`) and ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
 3. Follow either of below sub steps.  
    - If your organization does not have Elasticsearch server running or if you want to start Elastic stack on your own, start service by giving below command.
   
