@@ -114,6 +114,27 @@ New users and projects could be created via frontend app by default on http://lo
 </details>
 
 <details>
+<summary>Upgrade the database from PostgreSQL 12</summary>
+
+Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/18/docker`. A database created by PostgreSQL 12 (VRT 5.x) has to be copied once. PostgreSQL 18 refuses to start on the old `./db` folder, so the old data stays as it is. `pg-upgrade.sh` copies the database with `pg_dump` and `pg_restore`:
+
+1. In the folder with your `docker-compose.yml` and `.env`, keep a copy of the old `docker-compose.yml` for a rollback.
+2. Download the new `docker-compose.yml`, the new `.env` (carry over your settings) and the upgrade script:
+
+```
+curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/pg-upgrade.sh -o pg-upgrade.sh
+chmod a+x pg-upgrade.sh
+```
+
+3. Run `./pg-upgrade.sh`. It stops VRT, moves the old data to `./db-pg12`, starts PostgreSQL 18, copies the database into it and starts VRT again. VRT is down while the copy runs; the images in `./imageUploads` are not touched.
+4. Once VRT works, delete `./db-pg12` (`sudo` may be needed) and `vrt-pg12.dump`.
+
+To go back: `docker compose down`, `mv db db-pg18 && mv db-pg12 db`, put back the old `docker-compose.yml` and run `docker compose up -d`.
+
+Your own setup (a named volume, another compose file): run PostgreSQL 18 with its volume at `/var/lib/postgresql` and copy the database the same way. A database outside Docker needs no change now, but the next major version of VRT will need PostgreSQL 15 or newer.
+</details>
+
+<details>
 <summary>Run VRT with logging enabled in Elasticsearch</summary>
 
 This is for the users who want to monitor VRT logs via Kibana. It is expected to have basic knowledge of Elastic stack (especially Kibana) for the admin so that the logs can be managed and dashboards created in Kibana. 

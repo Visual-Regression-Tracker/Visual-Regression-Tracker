@@ -83,7 +83,7 @@ services:
         condition: service_healthy
     restart: on-failure
   postgres:
-    image: postgres:12
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -94,7 +94,7 @@ services:
     expose:
       - "${POSTGRES_PORT}"
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./db:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER"]
       interval: 10s
