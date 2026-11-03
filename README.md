@@ -127,9 +127,9 @@ chmod a+x pg-upgrade.sh
 ```
 
 3. Run `./pg-upgrade.sh`. It stops VRT, moves the old data to `./db-pg12`, starts PostgreSQL 18, copies the database into it and starts VRT again. VRT is down while the copy runs; the images in `./imageUploads` are not touched.
-4. Once VRT works, delete `./db-pg12` (`sudo` may be needed) and `vrt-pg12.dump`.
+4. Once VRT works, delete `./db-pg12` (`sudo` may be needed).
 
-To go back: `docker compose down`, `mv db db-pg18 && mv db-pg12 db`, put back the old `docker-compose.yml` and run `docker compose up -d`.
+To go back: `docker compose down`, `mv db db-new && mv db-pg12 db`, put back the old `docker-compose.yml` and run `docker compose up -d`.
 
 Your own setup (a named volume, another compose file): run PostgreSQL 18 with its volume at `/var/lib/postgresql` and copy the database the same way. A database outside Docker needs no change now, but the next major version of VRT will need PostgreSQL 15 or newer.
 </details>
