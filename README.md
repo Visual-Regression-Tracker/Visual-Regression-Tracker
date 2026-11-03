@@ -101,7 +101,11 @@ Arguments:
 
 3. In .env file, set JWT_SECRET to a random value (`openssl rand -hex 32`); the API does not start without one. Ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
 
-4. Start service
+4. The API runs as uid 1000, not root. On Linux, create the image folder for it before the first start (Docker would create it owned by root):
+
+`$ mkdir -p imageUploads && sudo chown -R 1000:1000 imageUploads`
+
+5. Start service
 
 `$ docker-compose up`
 
@@ -111,6 +115,18 @@ Wait until you see your creds printed.
 New users and projects could be created via frontend app by default on http://localhost:8080
 
 ![Success setup](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/docker_setup_creds.png)
+</details>
+
+<details>
+<summary>Upgrade from 5.x: the API runs as uid 1000</summary>
+
+Since 6.0, the API and migration images run as uid 1000 instead of root, and dinov2 as `nobody` (65534). VRT 5.x ran as root, so on an existing install `./imageUploads` and any TLS files belong to root. Before the first start of 6.0, give them to uid 1000:
+
+```
+sudo chown -R 1000:1000 ./imageUploads ./ssl
+```
+
+Otherwise the API stops with `… is not writable by uid 1000 (EACCES): chown -R 1000:1000 …`. A new named Docker volume instead of the bind mount needs nothing. The UI keeps reading the same folder.
 </details>
 
 <details>
