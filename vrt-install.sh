@@ -97,5 +97,16 @@ fi
 rm -f .envr
 
 echo " "
+echo Preparing the image folder for the API, which runs as uid 1000
+mkdir -p imageUploads
+if [ "$(uname)" = "Linux" ]; then
+    if [ "$(id -u)" -eq 0 ]; then
+        chown -R 1000:1000 imageUploads
+    else
+        sudo chown -R 1000:1000 imageUploads
+    fi
+fi
+
+echo " "
 echo Starting docker
 docker-compose up 
