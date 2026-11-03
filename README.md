@@ -114,6 +114,33 @@ New users and projects could be created via frontend app by default on http://lo
 </details>
 
 <details>
+<summary>Upgrade the database from PostgreSQL 12</summary>
+
+Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/18/docker`. PostgreSQL 18 cannot read a database created by PostgreSQL 12 (VRT 5.x): it refuses to start on the old `./db` folder and leaves it as it is. Copy the database once with `pg_dump` and `pg_restore`, or with any tool you prefer. The images in `./imageUploads` are not part of the database and stay where they are. A database outside the bundled `postgres` service needs nothing.
+
+In the folder with `docker-compose.yml` and `.env`, in a Linux, macOS or WSL shell (PowerShell's `>` and `<` do not pass the binary dump through):
+
+1. Stop the UI and the API, so nothing is written after the dump, and dump the database:
+
+```
+docker compose stop ui api
+docker compose exec -T postgres sh -c 'pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB"' > vrt-pg12.dump
+```
+
+2. Move the old data aside with `docker compose down && mv db db-pg12`, then take the new `docker-compose.yml` and `.env` as in Manual Setup, steps 1–2 (carry over your settings, keep the old `docker-compose.yml` for a rollback).
+3. Start the new database and restore the dump into it:
+
+```
+docker compose up -d --wait postgres
+docker compose exec -T postgres sh -c 'pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --exit-on-error' < vrt-pg12.dump
+```
+
+4. Start VRT: `docker compose up -d`. Once it works, delete `./db-pg12` (`sudo` may be needed) and `vrt-pg12.dump`.
+
+To go back: `docker compose down`, `mv db db-new && mv db-pg12 db`, put back the old `docker-compose.yml` and run `docker compose up -d`.
+</details>
+
+<details>
 <summary>Run VRT with logging enabled in Elasticsearch</summary>
 
 This is for the users who want to monitor VRT logs via Kibana. It is expected to have basic knowledge of Elastic stack (especially Kibana) for the admin so that the logs can be managed and dashboards created in Kibana. 
