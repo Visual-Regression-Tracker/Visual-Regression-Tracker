@@ -120,22 +120,22 @@ Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/1
 
 In the folder with `docker-compose.yml` and `.env`:
 
-1. With the old version still running, dump the database:
+1. Stop the UI and the API, so nothing is written after the dump, and dump the database:
 
 ```
+docker compose stop ui api
 docker compose exec -T postgres sh -c 'pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB"' > vrt-pg12.dump
 ```
 
-2. Stop VRT and move the old data aside: `docker compose down && mv db db-pg12`.
-3. Take the new `docker-compose.yml` and `.env` (carry over your settings), keep the old `docker-compose.yml` for a rollback.
-4. Start the new database and restore the dump into it:
+2. Move the old data aside with `docker compose down && mv db db-pg12`, then take the new `docker-compose.yml` and `.env` as in Manual Setup, steps 1–2 (carry over your settings, keep the old `docker-compose.yml` for a rollback).
+3. Start the new database and restore the dump into it:
 
 ```
 docker compose up -d --wait postgres
 docker compose exec -T postgres sh -c 'pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --exit-on-error' < vrt-pg12.dump
 ```
 
-5. Start VRT: `docker compose up -d`. Once it works, delete `./db-pg12` (`sudo` may be needed) and `vrt-pg12.dump`.
+4. Start VRT: `docker compose up -d`. Once it works, delete `./db-pg12` (`sudo` may be needed) and `vrt-pg12.dump`.
 
 To go back: `docker compose down`, `mv db db-new && mv db-pg12 db`, put back the old `docker-compose.yml` and run `docker compose up -d`.
 </details>
