@@ -1,6 +1,5 @@
 imageUploads
 db
-db-pg*
 
 *.cert
 *.key

@@ -116,22 +116,28 @@ New users and projects could be created via frontend app by default on http://lo
 <details>
 <summary>Upgrade the database from PostgreSQL 12</summary>
 
-Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/18/docker`. A database created by PostgreSQL 12 (VRT 5.x) has to be copied once. PostgreSQL 18 refuses to start on the old `./db` folder, so the old data stays as it is; this also happens when `vrt-install.sh` is run again on an existing install. `pg-upgrade.sh` copies the database with `pg_dump` and `pg_restore`:
+Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/18/docker`. PostgreSQL 18 cannot read a database created by PostgreSQL 12 (VRT 5.x): it refuses to start on the old `./db` folder and leaves it as it is. Copy the database once with `pg_dump` and `pg_restore`, or with any tool you prefer. The images in `./imageUploads` are not part of the database and stay where they are.
 
-1. In the folder with your `docker-compose.yml` and `.env`, keep a copy of the old `docker-compose.yml` for a rollback.
-2. Download the new `docker-compose.yml`, the new `.env` (carry over your settings) and the upgrade script:
+In the folder with `docker-compose.yml` and `.env`:
+
+1. With the old version still running, dump the database:
 
 ```
-curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/pg-upgrade.sh -o pg-upgrade.sh
-chmod a+x pg-upgrade.sh
+docker compose exec -T postgres sh -c 'pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB"' > vrt-pg12.dump
 ```
 
-3. Run `./pg-upgrade.sh` (it needs Docker Compose v2, `docker compose`). It stops VRT, moves the old data to `./db-pg12`, starts PostgreSQL 18, copies the database into it and starts VRT again. VRT is down while the copy runs; the images in `./imageUploads` are not touched.
-4. Once VRT works, delete `./db-pg12` (`sudo` may be needed).
+2. Stop VRT and move the old data aside: `docker compose down && mv db db-pg12`.
+3. Take the new `docker-compose.yml` and `.env` (carry over your settings), keep the old `docker-compose.yml` for a rollback.
+4. Start the new database and restore the dump into it:
+
+```
+docker compose up -d --wait postgres
+docker compose exec -T postgres sh -c 'pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --exit-on-error' < vrt-pg12.dump
+```
+
+5. Start VRT: `docker compose up -d`. Once it works, delete `./db-pg12` (`sudo` may be needed) and `vrt-pg12.dump`.
 
 To go back: `docker compose down`, `mv db db-new && mv db-pg12 db`, put back the old `docker-compose.yml` and run `docker compose up -d`.
-
-Your own setup (a named volume, another compose file): run PostgreSQL 18 with its volume at `/var/lib/postgresql` and copy the database the same way. A database outside Docker needs no change now, but the next major version of VRT will need PostgreSQL 15 or newer.
 </details>
 
 <details>
