@@ -95,6 +95,10 @@ services:
     image: visualregressiontracker/dinov2:${VRT_DINOV2_VERSION}
     profiles: ["dinov2"]
     restart: always
+    mem_limit: ${DINOV2_MEM_LIMIT:-2g}
+    environment:
+      DINOV2_MAX_PIXELS: ${DINOV2_MAX_PIXELS:-20000000}
+      DINOV2_MAX_QUEUE: ${DINOV2_MAX_QUEUE:-2}
   postgres:
     image: postgres:18
     restart: always
