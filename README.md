@@ -116,9 +116,9 @@ New users and projects could be created via frontend app by default on http://lo
 <details>
 <summary>Upgrade the database from PostgreSQL 12</summary>
 
-Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/18/docker`. PostgreSQL 18 cannot read a database created by PostgreSQL 12 (VRT 5.x): it refuses to start on the old `./db` folder and leaves it as it is. Copy the database once with `pg_dump` and `pg_restore`, or with any tool you prefer. The images in `./imageUploads` are not part of the database and stay where they are.
+Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/18/docker`. PostgreSQL 18 cannot read a database created by PostgreSQL 12 (VRT 5.x): it refuses to start on the old `./db` folder and leaves it as it is. Copy the database once with `pg_dump` and `pg_restore`, or with any tool you prefer. The images in `./imageUploads` are not part of the database and stay where they are. A database outside the bundled `postgres` service needs nothing.
 
-In the folder with `docker-compose.yml` and `.env`:
+In the folder with `docker-compose.yml` and `.env`, in a Linux, macOS or WSL shell (PowerShell's `>` and `<` do not pass the binary dump through):
 
 1. Stop the UI and the API, so nothing is written after the dump, and dump the database:
 
