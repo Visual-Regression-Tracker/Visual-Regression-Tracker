@@ -140,8 +140,6 @@ Arguments:
     -r | --backend-url <url>    Set the API url. Default: http://localhost:4200
     --jwt-secret <secret>       Set the JWT secret. Default: randomly generated
 ```
-
-The script still checks for the standalone `docker-compose` (v1).
 </details>
 
 <details>

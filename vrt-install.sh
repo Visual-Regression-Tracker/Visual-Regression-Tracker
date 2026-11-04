@@ -60,8 +60,9 @@ if [ ! -x "$(command -v docker)" ]; then
     echo "Visual Regression Tracker requires Docker. Check install docs here - $DOCKER_INSTALL_URL"
 fi
 
-if [ ! -x "$(command -v docker-compose)" ]; then
-    echo "Visual Regression Tracker requires docker-compose. Check install docs here - $DOCKER_COMPOSE_URL"
+if ! docker compose version >/dev/null 2>&1; then
+    echo "Visual Regression Tracker requires Docker Compose v2 (docker compose). Check install docs here - $DOCKER_COMPOSE_URL"
+    exit 1
 fi
 
 echo " "
@@ -109,4 +110,4 @@ fi
 
 echo " "
 echo Starting docker
-docker-compose up 
+docker compose up
