@@ -1,83 +1,137 @@
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg)](https://stand-with-ukraine.pp.ua)
 
 <p align="center">
-  <img src="./public/logo.png"/ width='200px' alt="Visual Regression Tracker logo">
+  <img src="./public/logo.png" width="200px" alt="Visual Regression Tracker logo">
 </p>
 
-<h1 align="center"> Visual Regression Tracker </h1>
-<h3 align="center"> Open source, self hosted solution for visual testing and managing results of visual testing. </h3>
+<h1 align="center">Visual Regression Tracker</h1>
+<h3 align="center">Open-source, self-hosted visual testing. Send screenshots from any test suite, review what changed, keep baselines up to date.</h3>
 
-## Hello 
-* Take [1-minute survey](https://forms.gle/DidGSodojQ4Qn4is6) to help us priorities tasks better ❤️
-* [Telegram group](https://t.me/visual_tracker)
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#whats-new-in-60">What's new in 6.0</a> ·
+  <a href="#integrations">Integrations</a> ·
+  <a href="https://t.me/visual_tracker">Telegram</a>
+</p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/diff-dark.png">
+  <img alt="A test run in review: the baseline on the left, the new screenshot with the changed price and button highlighted on the right" src="./public/screenshots/diff-light.png">
+</picture>
 
 ## How it works
-Service receives images, performs pixel by pixel comparison with it’s previously accepted baseline and provides immediate results in order to catch unexpected changes. 
 
-![Demo](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/demo.gif)
+1. Your tests take screenshots, with any framework, on any platform, and send them to VRT through an agent, an SDK or the REST API.
+2. VRT compares each screenshot with its accepted baseline for the same name, branch, browser, OS, viewport and device.
+3. Unchanged screenshots pass. Changed ones wait for review in the UI: approve to make the new screenshot the baseline, reject to keep the old one.
+
+Your CI gets the result immediately; your team reviews in one place.
+
+## What's new in 6.0
+
+### Review faster: changes first, rendering noise flagged
+
+Different machines draw the same page a little differently: fonts, anti-aliasing, GPU. Those diffs used to bury the real ones. 6.0 checks unresolved runs on request and labels each one **Likely change** or **Likely noise**, so you can sort and filter the build and review the real changes first. It is a hint: it never approves anything, and it shows you the areas it judged.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/noise-build-dark.png">
+  <img alt="A build of 28 unresolved runs with a Noise column: most say Likely change, some say Likely noise" src="./public/screenshots/noise-build-light.png">
+</picture>
+
+The check runs in two stages, set in the project's **Post-analysis** section. The blur stage runs on the API server. The optional DINOv2 stage (`--profile dinov2`) takes a second look at what blur calls noise, and catches faint icons and borders. On our benchmark of 120 real regressions under real rendering noise: blur alone keeps 92 of them as changes, both stages 102, with no false alarms on the noise.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/change-run-dark.png">
+  <img alt="The test run dialog with the rendering-noise panel: blur sees a change, DINOv2 not needed" src="./public/screenshots/change-run-light.png">
+</picture>
+
+### Undo a decision
+
+Approved the wrong screenshot? Every approve and reject shows **Undo** for a few seconds. Undo of a feature-branch approval also brings back that branch's ignore areas and comment. When two people decide on the same run at once, only the decision that took effect gets Undo.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/undo-dark.png">
+  <img alt="The Approved toast with an Undo button over a test run from a feature branch" src="./public/screenshots/undo-light.png">
+</picture>
+
+### Find your projects
+
+Star the projects you work on. Favourites and recently opened projects come first in the project list and in the project switcher, and both have search.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/projects-dark.png">
+  <img alt="The project list with a Favourites section above the other projects" src="./public/screenshots/projects-light.png">
+</picture>
+
+### A new look, in light and dark
+
+A redesigned UI on React 19 and MUI 9, with a dark theme that follows your system until you pick one.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/build-dark.png">
+  <img alt="A build with mixed results: new, unresolved and passed runs with their tags" src="./public/screenshots/build-light.png">
+</picture>
+
+### Secure by default
+
+- No public signing key: the API does not start without your own `JWT_SECRET`.
+- Live updates need a login and reach only the people looking at that project or build.
+- The containers run as an unprivileged user, on PostgreSQL 18 and Node 26.
+- Clear HTTP errors (`400`, `404`, `409`, `413`, `422`) instead of `200`/`500`.
+- `REGISTRATION_ENABLED=false` turns off sign-up; SSO (OIDC) maps roles from your identity provider.
+
+Upgrading from 5.x needs a database move to PostgreSQL 18 and a few settings: read the [6.0.0 release notes](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/releases/tag/6.0.0) before you start.
 
 ## Features
-* **Automation framework independent** - no need to stick with specific automation tool, integrate with existing one
-* **Platform independent** - web, mobile, desktop etc. as long as you could make a screenshot
-* **Baseline history** - track how baseline image changed since the beginning
-* **Ignore regions** - improve stability by ignoring not important or not controllable parts of image
-* **Language support** - JS, Java, Python, .Net or any other via REST API (need more?)
-* **Easy setup** - everything is inside Docker images
-* **Self-hosted** - keep your data save inside your intranet
-* **Can compare PDF too** - use standalone jar to compare pdf and images from a folder
 
-## Image Comparison Providers
+- **Works with any test framework**: Playwright, Cypress, CodeceptJS, Robot Framework, or your own through an SDK or the REST API.
+- **Any platform**: web, mobile, desktop, PDF; anything you can screenshot.
+- **Branches**: feature branches compare against their own baseline or the main branch's; merge a branch's baselines into another in one call.
+- **Baseline history**: see every accepted version of a screenshot, who approved it and when.
+- **Ignore areas**: mask dates, ads and other parts you cannot control, per screenshot or for a whole run.
+- **Four comparators**, chosen per project:
+  - [pixelmatch](https://github.com/mapbox/pixelmatch), pixel by pixel, the default;
+  - [looks-same](https://github.com/gemini-testing/looks-same), perceptual;
+  - [odiff](https://github.com/dmtrKovalenko/odiff), fast, with layout-shift detection;
+  - VLM: pixelmatch plus a vision language model (Ollama, Gemini) that judges whether a human would notice the change ([details](https://github.com/Visual-Regression-Tracker/backend/blob/master/src/compare/libs/vlm/README.md)).
+- **Rendering-noise hint**: see above.
+- **Bulk review**: approve, reject or delete many runs, with a result for each one.
+- **Users and roles**: admin, editor, guest; sign-in with a password, LDAP or SSO (OIDC).
+- **Self-hosted**: Docker Compose, your database, your images (local disk or S3), nothing leaves your network.
 
-Visual Regression Tracker supports multiple image comparison algorithms, each with different strengths and use cases:
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/settings-dark.png">
+  <img alt="Project settings: comparator, thresholds and the Post-analysis section with the blur and DINOv2 stages" src="./public/screenshots/settings-light.png">
+</picture>
 
-### Available Providers
+## Quick start
 
-* **Pixelmatch** - Fast pixel-by-pixel comparison algorithm. Default comparison method. Best for detecting exact pixel differences.
-  * Library: [pixelmatch](https://github.com/mapbox/pixelmatch)
-  
-* **Looks-Same** - Perceptual image comparison that considers human visual perception. Good for ignoring minor rendering differences.
-  * Library: [looks-same](https://github.com/gemini-testing/looks-same)
-  
-* **Odiff** - Advanced diff tool with layout detection and anti-aliasing support. Useful for detecting layout shifts.
-  * Library: [odiff-bin](https://github.com/dmtrKovalenko/odiff)
-  
-* **VLM (Vision Language Model)** - Hybrid comparison combining pixelmatch with AI-powered human-noticeability analysis using Vision Language Models. Analyzes if differences are actually noticeable to humans.
-  * Documentation: [VLM README](https://github.com/Visual-Regression-Tracker/backend/blob/master/src/compare/libs/vlm/README.md)
+You need [Docker](https://docs.docker.com/get-docker/) with Compose v2.
 
-You can configure which comparison provider to use per project in the project settings.
+```sh
+curl -O https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/docker-compose.yml
+curl -O https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env
+sed -i.bak "s/^JWT_SECRET=.*/JWT_SECRET=$(openssl rand -hex 32)/" .env
+mkdir -p imageUploads   # on Linux also: sudo chown -R 1000:1000 imageUploads
+docker compose up -d
+```
 
-## Glossary
-* TestVariation - historical record of Baselines by Name + Branch + OS + Browser + Viewport + Device, 
-* Baseline - validated and accepted image, latest will be used as expected result in TestRun
-* TestRun - result of comparing image against Baseline
-* Build - list of TestRuns
-* Project - list of Builds and TestVariations
+Open http://localhost:8080 and sign in as `visual-regression-tracker@example.com` / `123456`; the API key of that user is in `.env` (`DEFAULT_USER_API_KEY`). **Change both before anyone else can reach the server.**
 
-## Set up
+With the rendering-noise check's DINOv2 stage: `docker compose --profile dinov2 up -d` and uncomment `DINOV2_URL` in `.env`.
 
-Use any of the below ways to setup the server. [Docker](https://docs.docker.com/get-docker/) has to be installed on the machine.
+To reach VRT from other machines, replace `localhost` in `REACT_APP_API_URL` and `APP_FRONTEND_URL` with a name or IP they can resolve.
 
 <details>
-<summary>Quick Setup</summary>
-
-### Linux, macOS, WSL
-
-1. Download the installation script
+<summary>Installation script (Linux, macOS, WSL)</summary>
 
 ```
 curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/vrt-install.sh -o vrt-install.sh
 chmod a+x vrt-install.sh
+./vrt-install.sh
 ```
 
-2. Run the installation script
-
-`./vrt-install.sh`
-
-#### Command line arguments
-
 ```
-Installs the Visual Regression Tracker
-
 Usage: ./vrt-install.sh
 
 Arguments:
@@ -86,35 +140,8 @@ Arguments:
     -r | --backend-url <url>    Set the API url. Default: http://localhost:4200
     --jwt-secret <secret>       Set the JWT secret. Default: randomly generated
 ```
-</details>
 
-<details>
-<summary>Manual Setup</summary>
-
-1. Copy [docker-compose.yml](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/docker-compose.yml)  
-
-`$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/docker-compose.yml -o docker-compose.yml`
-
-2. Copy [.env](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/.env) 
-
-`$ curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/.env -o .env`
-
-3. In .env file, set JWT_SECRET to a random value (`openssl rand -hex 32`); the API does not start without one. Ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
-
-4. The API runs as uid 1000, not root. On Linux, create the image folder for it before the first start (Docker would create it owned by root):
-
-`$ mkdir -p imageUploads && sudo chown -R 1000:1000 imageUploads`
-
-5. Start service
-
-`$ docker-compose up`
-
-
-Wait until you see your creds printed.
-
-New users and projects could be created via frontend app by default on http://localhost:8080
-
-![Success setup](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/docker_setup_creds.png)
+The script still checks for the standalone `docker-compose` (v1).
 </details>
 
 <details>
@@ -143,7 +170,7 @@ docker compose stop ui api
 docker compose exec -T postgres sh -c 'pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB"' > vrt-pg12.dump
 ```
 
-2. Move the old data aside with `docker compose down && mv db db-pg12`, then take the new `docker-compose.yml` and `.env` as in Manual Setup, steps 1–2 (carry over your settings, keep the old `docker-compose.yml` for a rollback).
+2. Move the old data aside with `docker compose down && mv db db-pg12`, then take the new `docker-compose.yml` and `.env` as in **Quick start** (carry over your settings, keep the old `docker-compose.yml` for a rollback).
 3. Start the new database and restore the dump into it:
 
 ```
@@ -157,69 +184,46 @@ To go back: `docker compose down`, `mv db db-new && mv db-pg12 db`, put back the
 </details>
 
 <details>
-<summary>Run VRT with logging enabled in Elasticsearch</summary>
+<summary>Logs in Elasticsearch and Kibana</summary>
 
-This is for the users who want to monitor VRT logs via Kibana. It is expected to have basic knowledge of Elastic stack (especially Kibana) for the admin so that the logs can be managed and dashboards created in Kibana. 
-Since logging will be retained by Elasticsearch, it will consume a little more memory and CPU. If you see error in the console, please consult Elasticsearch documentation.
+For admins who monitor VRT through Kibana; Elasticsearch keeps the logs and needs more memory and CPU.
 
-_**It is recommended to run the program as root user which will ensure permission and ownership related issues will not have to be dealt with.**_
-
-1. Clone or download this repository.  
-2. Move to the downloaded/cloned repository. In .env file, set JWT_SECRET to a random value (`openssl rand -hex 32`) and ensure that the REACT_APP_API_URL has the right address. If it will be accessed from other machines, change localhost with IP or other resolvable name. Ensure the ports being used are free to use.
-3. Follow either of below sub steps.  
-   - If your organization does not have Elasticsearch server running or if you want to start Elastic stack on your own, start service by giving below command.
-  
-     `$ docker-compose -f docker-compose.yml -f docker-compose.elastic.logging.yml up`
-   - If you want to re-use the already running Elasticsearch server in your organization, go to `filebeat/config/filebeat.yml` and edit hosts to point to the Elasticsearch server. Also, point ELASTIC_URL to this server in .env file. Start service by giving below command.
-
-     `$ docker-compose -f docker-compose.yml -f docker-compose.logging.yml up`
-
-4. If you are not using root user, in some OS, you may see an error `Exiting: error loading config file: config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`. In that case, press Ctrl+C, and follow [Elasticsearch instructions](https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html). Once done, start the service again.
+1. Clone this repository and go to its folder. In `.env`, set `JWT_SECRET` (`openssl rand -hex 32`) and check `REACT_APP_API_URL`.
+2. Start one of:
+   - with a new Elastic stack: `docker compose -f docker-compose.yml -f docker-compose.elastic.logging.yml up`
+   - with your organisation's Elasticsearch: set its hosts in `filebeat/config/filebeat.yml` and `ELASTIC_URL` in `.env`, then `docker compose -f docker-compose.yml -f docker-compose.logging.yml up`
+3. If Filebeat stops with `config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`, follow the [Elastic instructions](https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html) and start again.
 </details>
 
-## Integration
-Use implemented libraries to integrate with existing automated suites by adding assertions based on image comparison.
-We provide native integration with automation libraries, core SDK and Rest API interfaces that allow the system to be used with any existing programming language.
+## Integrations
 
-### Agents
-* [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
-* [Cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress)
-* [CodeceptJS](https://github.com/Visual-Regression-Tracker/agent-codeceptjs)
-* [Robot Framework](https://github.com/NiceProjectPoland/robotframework-VRTLibrary)
+| | Package | 6.0 server |
+|---|---|---|
+| Playwright | [agent-playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright) | 5.5.0+ |
+| Cypress | [agent-cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress) | 5.9.0+ |
+| CodeceptJS | [agent-codeceptjs](https://github.com/Visual-Regression-Tracker/agent-codeceptjs) | |
+| Robot Framework | [robotframework-VRTLibrary](https://github.com/NiceProjectPoland/robotframework-VRTLibrary) (community) | |
+| JavaScript / TypeScript | [sdk-js](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js) | 5.9.0+ |
+| Java | [sdk-java](https://github.com/Visual-Regression-Tracker/sdk-java) | 5.6.1+ |
+| Python | [sdk-python](https://github.com/Visual-Regression-Tracker/sdk-python) | 5.1.0+ |
+| .NET | [sdk-dotnet](https://github.com/Visual-Regression-Tracker/sdk-dotnet) | 5.1.0+ |
+| Anything else | REST API, Swagger at `http://localhost:4200/api` | |
 
-### Core SDK
-Basic wrapper over API to be used for integration with existing tools
-* [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js)
-* [Java](https://github.com/Visual-Regression-Tracker/sdk-java)
-* [Python](https://github.com/Visual-Regression-Tracker/sdk-python)
-* [Dotnet](https://github.com/Visual-Regression-Tracker/sdk-dotnet)
+Examples: [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js) · [Java](https://github.com/Visual-Regression-Tracker/examples-java) · [Python](https://github.com/Visual-Regression-Tracker/examples-python) · [.NET](https://github.com/Visual-Regression-Tracker/examples-dotnet)
 
-## Getting started guide
+Guides: [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress) · [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright) · [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook) · [Selenide](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide) · [Jenkins](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-publish-VRT-result-in-jenkins) · [Images and PDF from a folder](https://github.com/Visual-Regression-Tracker/examples-java/tree/master/standalone-from-folder-maven) · [Set up on a remote machine (video)](https://www.youtube.com/watch?v=cPsHeKnqL2M)
 
-### Videos
+## Glossary
 
-* [How to set up on Remote machine via ssh](https://www.youtube.com/watch?v=cPsHeKnqL2M&feature=emb_logo)
+- **Project**: builds and test variations of one product.
+- **Build**: the test runs of one CI run.
+- **Test run**: one screenshot compared with its baseline.
+- **Test variation**: the history of baselines for one name + branch + OS + browser + viewport + device.
+- **Baseline**: the accepted screenshot that the next run is compared with.
 
-### Wiki
+## Contributing
 
-* [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress)
-* [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright)
-* [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook)
-* [Selenide (Java)](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide)
-* [Jenkins VRT result publishing example (with JAVA SDK)](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-publish-VRT-result-in-jenkins)
-* [Compare image and pdf files as CLI](https://github.com/Visual-Regression-Tracker/examples-java/tree/master/standalone-from-folder-maven)
-
-## Integration examples
-Here you could find examples 
-* [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js)
-* [Java](https://github.com/Visual-Regression-Tracker/examples-java)
-* [Python](https://github.com/Visual-Regression-Tracker/examples-python)
-* [Dotnet](https://github.com/Visual-Regression-Tracker/examples-dotnet)
-
-## Contribution
-1. Try it, raise tickets with ideas, questions, bugs and share feedback :)
-1. More language support for SDK
-1. More integration with specific testing frameworks (agents)
+Try it, open issues with ideas, questions and bugs, and tell us what you think in the [1-minute survey](https://forms.gle/DidGSodojQ4Qn4is6) or on [Telegram](https://t.me/visual_tracker). SDKs for more languages and agents for more frameworks are welcome.
 
 ## Contributors ✨
 
