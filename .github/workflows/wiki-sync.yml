@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - "docs/wiki/**"
+      - ".github/workflows/wiki-sync.yml"
   workflow_dispatch:
 
 permissions:
@@ -22,7 +23,7 @@ jobs:
       - name: Publish docs/wiki to the wiki
         run: |
           git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" "$RUNNER_TEMP/wiki"
-          rsync -a --delete --exclude '.git' docs/wiki/ "$RUNNER_TEMP/wiki/"
+          rsync -a --checksum --delete --exclude '.git' docs/wiki/ "$RUNNER_TEMP/wiki/"
           cd "$RUNNER_TEMP/wiki"
           git add -A
           if git diff --cached --quiet; then
