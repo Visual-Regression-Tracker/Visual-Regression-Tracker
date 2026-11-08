@@ -49,7 +49,7 @@ Upgrade the UI and the API together: UI 6.0 needs API 6.0.
 - **Comparison results can change.** The project's comparison settings are applied on top of the defaults and the comparators were fixed. Expect some runs to get a different status after the upgrade.
 - **Database connections use no TLS** unless `DATABASE_URL` contains `sslmode`. If your database needs TLS, add `?sslmode=require`.
 - **The Merge branches panel is gone** from the UI. The API call `POST /test-variations/merge` stays ([Variations and history](Variations-and-history)).
-- **The rendering-noise check replaces the earlier noise filter** of the 6.0 release candidates. It is a hint that never changes a status, and it is off for projects created after the upgrade. Existing projects keep it on; switch it off in **Settings** → **Post-analysis**. See [Noise hint](Noise-hint).
+- **The rendering-noise check replaces the earlier noise filter** of the 6.0 release candidates. It is a hint that never changes a status, and it is off for every project after the upgrade; switch it on in **Settings** → **Post-analysis**. See [Noise hint](Noise-hint).
 - **Docker Compose v2 is required.**
 
 ## Clients
