@@ -24,6 +24,8 @@ Open http://localhost:8080 and sign in with the default user from `.env`: `DEFAU
 
 If you use SSO, the sign-in page shows **Login with SSO**.
 
+The **Help** menu in the UI has a **Documentation** link to this wiki.
+
 ## Create a project
 
 On the **Projects** page click **Add project**, enter a name and the main branch and click **Create**. See [Projects](Projects).
@@ -34,7 +36,7 @@ Your tests send screenshots through an agent, an SDK or the REST API. Each needs
 
 - the API URL (`REACT_APP_API_URL`, `http://localhost:4200` by default),
 - the project id, copied from the project card with **Copy id**,
-- an API key, shown on your profile page.
+- an API key, shown on your profile page. It must belong to an Editor or an Admin: a Guest's key is refused with HTTP 403.
 
 The **Profile** page has **Configuration examples** (a config file or environment variables) with the API URL and the selected project filled in; add your API key.
 

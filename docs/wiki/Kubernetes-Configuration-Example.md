@@ -11,7 +11,7 @@ Notes for VRT 6.0:
 - `JWT_SECRET` is required: the API does not start without it or with the old sample value. Use a random value, for example from `openssl rand -hex 32`.
 - The api and migration images run as user id 1000, not root. If you mount volumes or TLS files, make them readable and writable for that user (for example with `securityContext.fsGroup: 1000`).
 - Run the migration job to completion before the api starts, and use the same version for api, migration and UI.
-- Auto approve is a project setting now; the `AUTO_APPROVE_BASED_ON_HISTORY` variable is no longer used.
+- Auto approve is a project setting (since 4.14); the `AUTO_APPROVE_BASED_ON_HISTORY` variable is no longer used.
 - Live updates need a login token. With more than one API replica set `REDIS_URL`. See [Configuration](Configuration).
 - The database must be PostgreSQL 12 or later; 15 or later is recommended.
 

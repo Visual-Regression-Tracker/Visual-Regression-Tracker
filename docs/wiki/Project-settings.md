@@ -28,4 +28,4 @@ Comparison settings change which runs become unresolved. The tolerance your test
 
 ## Post-analysis
 
-The rendering-noise check: Stage 1 · Blur, Stage 2 · DINOv2 second look and their thresholds. See [Noise hint](Noise-hint). It is off for new projects.
+The rendering-noise check: Stage 1 · Blur, Stage 2 · DINOv2 second look and their thresholds. See [Noise hint](Noise-hint). It is off for projects created after the upgrade to 6.0; existing projects keep it on until you switch it off here.

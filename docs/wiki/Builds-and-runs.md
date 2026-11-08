@@ -23,9 +23,8 @@ When the noise check has run, the header also shows a line such as "5 of 28 unre
 
 ## Run list
 
-Runs are shown as a table or a grid of cards. The **View** menu sets:
+Runs are shown as a table or a grid of cards; switch with the **Table view** and **Grid view** toggle. The **View** menu sets:
 
-- table or grid,
 - **Group by**: **None**, or **Variation** by the axis chosen in [Project settings](Project-settings) (one row or card per screen),
 - **Density** (table): **Comfortable**, **Standard** or **Compact**,
 - **Show diff in grid** (hotkey D).

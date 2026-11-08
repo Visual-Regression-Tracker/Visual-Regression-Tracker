@@ -23,7 +23,7 @@ VRT is configured with the `.env` file next to `docker-compose.yml`. Compose pas
 
 ## Database
 
-`POSTGRES_PORT`, `POSTGRES_USER`, `POSTGRES_PASSWORD` and `POSTGRES_DB` configure the bundled PostgreSQL 18. The API reaches it through `DATABASE_URL`, which Compose builds from these values. For your own database, set `DATABASE_URL` yourself; add `?sslmode=require` if the connection must use TLS, because VRT 6.0 connects without TLS unless asked.
+`POSTGRES_PORT`, `POSTGRES_USER`, `POSTGRES_PASSWORD` and `POSTGRES_DB` configure the bundled PostgreSQL 18. The API and the migration service reach it through `DATABASE_URL`, which `docker-compose.yml` builds from these values; a `DATABASE_URL` in `.env` has no effect. For your own database, edit `DATABASE_URL` for `api` and for `migration` in `docker-compose.yml`, and add `?sslmode=require` if the connection must use TLS, because VRT 6.0 connects without TLS unless asked.
 
 ## First admin
 
@@ -72,7 +72,7 @@ See [Noise hint](Noise-hint). The blur stage needs nothing. The second stage nee
 | Variable | Default | Meaning |
 |---|---|---|
 | `DINOV2_URL` | empty | Address of the DINOv2 service. Without it only the blur stage works. |
-| `DINOV2_TIMEOUT_MS` | empty | How long the API waits for the service. |
+| `DINOV2_TIMEOUT_MS` | `60000` | How long the API waits for the service. |
 | `DINOV2_MAX_PIXELS` | `20000000` | The service refuses larger screenshots. |
 | `DINOV2_MAX_QUEUE` | `2` | The service refuses more waiting requests than this. |
 | `DINOV2_MEM_LIMIT` | `2g` | Memory limit of the service container. |

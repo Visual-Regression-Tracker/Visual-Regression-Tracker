@@ -32,11 +32,11 @@ This view is computed in your browser from the baseline and the new screenshot. 
 Parts of a screen that change on their own, such as dates or ads, can be left out of the comparison.
 
 1. Click **Edit areas**.
-2. Pick the area type: **Ignore Areas** (masked out) or **Compare Area** (only this part is compared; it is saved as ignore areas for the rest).
+2. Pick the area type: **Ignore areas** (masked out) or **Compare area** (only this part is compared; it is saved as ignore areas for the rest).
 3. Click **Draw** and drag on the image. **Delete selected** removes the selected area, **Clear all** removes all of them.
 4. Click **Save**, or **Cancel**.
 
-**Apply to whole build** re-compares all images in the current build with the selected ignore area taken into account.
+**Apply selected to whole build…** re-compares all images in the current build with the selected ignore area taken into account.
 
 The **Ignore areas (N)** chip shows or hides the saved areas on the image. Ignore areas belong to the screen, so they apply to its next runs as well.
 
@@ -44,7 +44,7 @@ The **Ignore areas (N)** chip shows or hides the saved areas on the image. Ignor
 
 The footer has **Approve** and **Reject** for runs that wait for review (hotkeys A and X). The checkbox **Go to the next after Approve/Reject** moves on to the next run.
 
-- For a feature-branch run, a chip shows "merge into: <branch>": approving updates the baseline of that branch.
+- For a merge run, a chip shows "merge into: <branch>": approving updates the baseline of that branch.
 - When the project has **Bulk approve/reject variations** on, **Approve variations…** and **Reject variations…** open all matching variations of the screen (for example every locale) in one dialog. See [Project settings](Project-settings).
 
 After a decision, a message shows **Undo**; the footer of a decided run has **Undo approval** or **Undo rejection**. Undo puts the run back to its earlier status. Undoing a feature-branch approval also restores that branch's ignore areas and comment. Approvals made before 6.0 are undone without restoring ignore areas and comment. Auto-approved runs cannot be undone this way.

@@ -11,7 +11,7 @@ Different machines draw the same page a little differently: fonts, anti-aliasing
 
 ## Turn it on
 
-The check is **off by default for new projects since 6.0**. Projects that existed before keep the setting they had.
+The check is off by default for projects created after the upgrade to 6.0. Projects that already exist, including those upgraded from 5.x or from an earlier 6.0 release candidate, keep their setting, and that is on. To switch it off for a project, open **Settings**, go to **Post-analysis** and turn off **Stage 1 · Blur** and **Stage 2 · DINOv2 second look**, then click **Save**.
 
 1. Open the project's **Settings** tab and go to **Post-analysis**. See [Project settings](Project-settings).
 2. Turn on **Stage 1 · Blur**. It runs on the VRT server and needs nothing else.
