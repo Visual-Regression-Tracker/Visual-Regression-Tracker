@@ -24,7 +24,8 @@ The section is not available for projects that use the VLM comparator, and stage
 
 ## Analyse a build or a run
 
-- **Whole build:** open the **Build menu** (the ⋯ button in the build header) and choose **Analyse rendering noise (N)**. N is the number of unresolved runs in the current list.
+- **Whole build:** open the **Build menu** (the ⋯ button in the build header) and choose **Analyse noise (N)**. N is the number of unresolved runs in the current list.
+- **Selected runs:** select runs in the run list and click **Analyse noise** in the selection bar. Only the unresolved ones are analysed. The rows switch to "Analysing…" at once.
 - **One run:** in the [Run dialog](Run-dialog), click the noise chip (**Not analysed**) and then **Analyse**. **Analyse again** repeats it.
 
 The build header shows the progress while runs are analysed.

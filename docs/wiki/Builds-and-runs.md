@@ -13,7 +13,7 @@ Selecting a build shows its header with the build number, CI build id, branch an
 The **Build menu** (the ⋯ button) has:
 
 - **Stop build**: marks a running build as finished.
-- **Analyse rendering noise (N)**: see [Noise hint](Noise-hint). Shown when the check is on for the project.
+- **Analyse noise (N)**: see [Noise hint](Noise-hint). Shown when the check is on for the project.
 - **Edit CI build id…**
 - **Delete build…**: also removes its runs.
 
@@ -31,6 +31,8 @@ Runs are shown as a table or a grid of cards; switch with the **Table view** and
 
 Filter chips narrow the list by OS, browser, viewport, device and tags, and by **Noise** when the noise check is on. Each tag chip searches its own field.
 
+A run that has a comment shows a comment icon in the table and on the cards; hover over it or focus it to read the comment.
+
 Click a run to open the [Run dialog](Run-dialog).
 
 ## Bulk actions
@@ -38,6 +40,7 @@ Click a run to open the [Run dialog](Run-dialog).
 Select runs with the checkboxes. The selection bar offers:
 
 - **Approve** and **Reject**: the result of each run is reported; a run that someone else already decided is listed as failed.
+- **Analyse noise**: analyses the selected unresolved runs, see [Noise hint](Noise-hint). The rows switch to "Analysing…" at once. It is available when the check is on for the project.
 - **Clear ignore areas…**
 - **Download zip**
 - **Delete…**
