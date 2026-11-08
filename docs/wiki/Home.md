@@ -7,7 +7,7 @@ This wiki describes VRT 6.0. If you are on 5.x, start with [Upgrade from 5.x](Up
 ## Start here
 
 - [Getting started](Getting-started): install VRT, sign in, send a first screenshot. The **Help** menu in the UI has a **Documentation** link to this wiki.
-- [Projects](Projects): create projects, favourites, the project switcher.
+- [Projects](Projects): add projects, favourites, the project switcher.
 - [Builds and runs](Builds-and-runs): what a build and a test run are, filters, bulk actions.
 - [Statuses](Statuses): what New, Unresolved, Approved and the others mean.
 

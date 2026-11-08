@@ -6,6 +6,8 @@ A **variation** is one screen as VRT tracks it: the screenshot name together wit
 
 The **Variations** tab lists the variations of the project as cards with a preview. Filter them by **Branch**, **Browser**, **Device**, **OS**, **Tags** and **Viewport**, and set **Per page**.
 
+A variation or baseline version whose run has a comment shows a comment icon; hover over it or focus it to read the comment.
+
 Click **History** on a card for the history of that variation. A card can also be deleted.
 
 ## History

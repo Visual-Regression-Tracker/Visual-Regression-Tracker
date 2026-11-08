@@ -35,7 +35,7 @@ On the **Projects** page click **Add project**, enter a name and the main branch
 Your tests send screenshots through an agent, an SDK or the REST API. Each needs three values:
 
 - the API URL (`REACT_APP_API_URL`, `http://localhost:4200` by default),
-- the project id, copied from the project card with **Copy id**,
+- the project id, shown in the address of the project page and in the **Configuration examples** on your profile page,
 - an API key, shown on your profile page. It must belong to an Editor or an Admin: a Guest's key is refused with HTTP 403.
 
 The **Profile** page has **Configuration examples** (a config file or environment variables) with the API URL and the selected project filled in; add your API key.

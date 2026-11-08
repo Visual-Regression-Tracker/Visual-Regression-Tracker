@@ -7,7 +7,7 @@ Click a run in a build to open the run dialog. It shows the baseline and the new
 - The position in the build, with **Previous run** and **Next run** (left and right arrow keys).
 - The run status, and how much differs: "Diff 0.4% · tolerance 0.1%". Hover for the full text. The tolerance is the `diffTollerancePercent` your test sends with the screenshot.
 - A rendering-noise chip, when the check is on for the project: see [Noise hint](Noise-hint).
-- **Comments**: free text saved with the run.
+- **Comment**: the comment of the run shows as a chip with its first line; hover over it to read all of it and click it to edit (**Edit comment**). Without a comment, use the **Add comment** button. The comment is saved with the run.
 - **Close**.
 
 If the baseline or the new image cannot be loaded, or the sizes differ, a message above the images says so.

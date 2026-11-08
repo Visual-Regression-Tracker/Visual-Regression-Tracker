@@ -4,23 +4,24 @@ A project holds the builds, screens (variations) and baselines of one applicatio
 
 ## Project list
 
-The **Projects** page shows your projects as cards. The search box looks at the name, the id and the main branch.
+The **Projects** page shows your projects as cards, in the sections **Favourites**, **Recently opened** and **Other projects**. The search box (placeholder "Search projects") looks at the name and the main branch. Press / anywhere on the page to jump to it ("Press / to search").
 
-- **Favourites**: click the star on a card (**Add to favourites** / **Remove from favourites**) to pin a project to the top.
-- **Recently opened**: projects you opened lately come next, then **Other projects**.
-- **Copy id**: copies the project id that your tests need.
+- Click anywhere on a card to open the project.
+- **Add to favourites** / **Remove from favourites**: the star on a card pins the project to **Favourites**.
 - **Project settings**: opens [Project settings](Project-settings).
 - **Delete project**: removes the project with all its builds and baselines. Editors and admins only.
 
 Guests see the projects but no create, edit or delete actions.
 
-## Create a project
+## Add a project
 
-Click **Add project**. The **Create Project** dialog has the same fields as [Project settings](Project-settings); set the project name and the main branch and click **Create**. The main branch is the branch whose baselines other branches are compared with.
+Click **Add project**. It opens its own page, laid out like [Project settings](Project-settings), with the same sections. Set the project name and the main branch and click **Create** (or **Cancel**). The main branch is the branch whose baselines other branches are compared with. Guests cannot open this page.
+
+The project id that your tests need is in the address of the project page, and the **Profile** page fills it into its configuration examples when the project is selected ([Profile and API key](Profile-and-API-key)).
 
 ## Project switcher
 
-On a project page, the breadcrumb at the top has a project menu. It lists recently opened projects first and searches as you type.
+On a project page, the breadcrumb at the top has a project menu. It groups projects as **Favourites**, **Recently opened** and **Other projects** and searches as you type.
 
 ## Project page
 
