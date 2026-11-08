@@ -1,5 +1,5 @@
 ## Intro
-[https://www.cypress.io/](Cypress)
+[Cypress](https://www.cypress.io/)
 
 Libraries used: 
 * [cypress](https://www.npmjs.com/package/cypress) 
