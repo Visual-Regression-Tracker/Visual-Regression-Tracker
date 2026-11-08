@@ -38,7 +38,7 @@ VRT is configured with the `.env` file next to `docker-compose.yml`. Compose pas
 | `MULTIPART_FILE_SIZE_LIMIT` | `104857600` (100 MB) | Largest multipart screenshot, in bytes. |
 | `MAX_IMAGE_PIXELS` | `100000000` | Screenshots with more pixels are refused. |
 | `REGISTRATION_ENABLED` | `true` | `false` hides sign-up. |
-| `LOG_LEVEL` | empty | Comma-separated Nest log levels, for example `log,error,warn`. |
+| `LOG_LEVEL` | `log,error,warn,fatal` | Comma-separated Nest log levels to keep. Add `debug` or `verbose` to see more. |
 | `DIFF_WORKER_MAX_HEAP_MB` | `512` | Memory limit of each image-comparison worker, in MB. Raise it if large screenshots make workers run out of memory. |
 
 ## Image storage
