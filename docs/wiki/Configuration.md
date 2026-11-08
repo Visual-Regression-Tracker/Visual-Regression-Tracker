@@ -39,12 +39,15 @@ VRT is configured with the `.env` file next to `docker-compose.yml`. Compose pas
 | `MAX_IMAGE_PIXELS` | `100000000` | Screenshots with more pixels are refused. |
 | `REGISTRATION_ENABLED` | `true` | `false` hides sign-up. |
 | `LOG_LEVEL` | empty | Comma-separated Nest log levels, for example `log,error,warn`. |
+| `DIFF_WORKER_MAX_HEAP_MB` | `512` | Memory limit of each image-comparison worker, in MB. Raise it if large screenshots make workers run out of memory. |
 
 ## Image storage
 
 Images go to `./imageUploads` by default. For Amazon S3 set `STATIC_SERVICE=s3` and `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION` and `AWS_S3_BUCKET_NAME`.
 
 The API runs as user id 1000, so on Linux `./imageUploads` and any TLS files must belong to it: `sudo chown -R 1000:1000 ./imageUploads ./ssl`.
+
+To serve the API over HTTPS directly, mount a key and a certificate and point `HTTPS_KEY_PATH` and `HTTPS_CERT_PATH` at them (defaults `./secrets/ssl.key` and `./secrets/ssl.cert`; the sample `docker-compose.yml` has the mounts commented out). The API uses HTTPS only when both files exist.
 
 ## Sign-in
 
