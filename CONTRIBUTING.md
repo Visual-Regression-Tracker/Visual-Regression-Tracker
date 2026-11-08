@@ -7,5 +7,5 @@ User-facing docs live in [`docs/wiki`](docs/wiki) and are published to the
 by a GitHub Action when a change reaches `master`.
 
 - Do not edit the wiki in the browser: the next sync overwrites it.
-- A user-visible change in the frontend or backend updates `docs/wiki` in the same pull request.
+- A user-visible change in the frontend or backend comes with a companion pull request here that updates `docs/wiki`.
 - Page links use the wiki syntax, `[[Page name]]` or `[text](Page-name)`.
