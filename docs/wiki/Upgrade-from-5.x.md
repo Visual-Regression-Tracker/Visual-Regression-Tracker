@@ -43,7 +43,7 @@ Upgrade the UI and the API together: UI 6.0 needs API 6.0.
 - **Everyone signs in again once.** Tokens from 5.x are not accepted. API keys of your SDKs and agents keep working.
 - **No public signing key.** The API refuses to start without your own `JWT_SECRET`.
 - **The API runs as user id 1000.** Check the `chown` step and, if you override `command` or `entrypoint` (Kubernetes), the image's command, which is now `node dist/main`.
-- **Live updates need a login.** A UI 5.x gets no live updates from API 6.0. While a 5.x UI must keep working, set `WS_AUTH_REQUIRED=false` and `WS_BROADCAST=true`, and remove both once every UI runs 6.0.
+- **Live updates need a login.** Each client gets only the events of the project or build it shows. A UI 5.x gets no live updates from API 6.0: upgrade UI and API together.
 - **HTTP errors are 4xx** (`400`, `404`, `409`, `413`, `422`, `503`) instead of `200` or `500`. Check custom clients that treated any `2xx` as success.
 - **Stricter uploads:** a screenshot that is not a PNG gets `400`; above `MAX_IMAGE_PIXELS` it gets `422`; a request body above `BODY_PARSER_JSON_LIMIT` gets `413`.
 - **Comparison results can change.** The project's comparison settings are applied on top of the defaults and the comparators were fixed. Expect some runs to get a different status after the upgrade.

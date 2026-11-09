@@ -57,13 +57,11 @@ To serve the API over HTTPS directly, mount a key and a certificate and point `H
 
 ## Live updates
 
+Live updates need a signed-in UI 6.0; each client gets only the events of the project or build it shows.
+
 | Variable | Default | Meaning |
 |---|---|---|
-| `WS_AUTH_REQUIRED` | `true` | Live-update connections need a login token. |
-| `WS_BROADCAST` | `false` | `true` sends every event to every client instead of only to those viewing that project or build. |
 | `REDIS_URL` | empty | Needed only with more than one API instance, so events reach clients on any instance. There is no Redis service in `docker-compose.yml`; add your own. |
-
-A UI of version 5.x cannot use live updates with an API 6.0 unless you set `WS_AUTH_REQUIRED=false` and `WS_BROADCAST=true`.
 
 ## Rendering-noise check
 
