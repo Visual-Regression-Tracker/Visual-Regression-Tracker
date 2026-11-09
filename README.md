@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">Visual Regression Tracker</h1>
-<h3 align="center">Open-source, self-hosted visual testing. Send screenshots from any test suite, review what changed, keep baselines up to date.</h3>
+<h3 align="center">Open-source, self-hosted visual testing.</h3>
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
@@ -17,67 +17,31 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/diff-dark.png">
-  <img alt="A test run in review, Diff view: the baseline on the left, the changed price and button highlighted on the new screenshot" src="./public/screenshots/diff-light.png">
+  <img alt="A test run in review: the baseline and the new screenshot with the changes highlighted" src="./public/screenshots/diff-light.png">
 </picture>
 
 ## How it works
 
-- **Send:** your tests take screenshots and send them to VRT through an agent, an SDK or the REST API.
-- **Compare:** VRT compares each screenshot with the accepted baseline for the same name, branch, browser, OS, viewport and device.
-- **Review:** unchanged screenshots pass at once. Changed ones wait in the UI: approve makes the new screenshot the baseline, reject keeps the old one.
+- Tests send screenshots through an agent, an SDK or the REST API.
+- Each screenshot is compared with its baseline (same name, branch, browser, OS, viewport, device).
+- Unchanged ones pass; changed ones wait for review: approve or reject.
 
 ## Features
 
-**Review**
-- Builds and test runs with filters by status, tag and noise; table or grid view.
-- Side by side, diff and fade views of a screenshot against its baseline.
-- Approve, reject or delete many runs at once, with a result for each.
-- Undo an approval or a rejection.
-- Comments on runs.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/build-dark.png">
-  <img alt="A build of eleven runs: unresolved runs labelled Likely change or Likely noise, and passed runs" src="./public/screenshots/build-light.png">
-</picture>
-
-**Rendering noise**
-- Flags unresolved runs as **Likely change** or **Likely noise**, so real changes are reviewed first. A hint only: it never approves anything.
-- Two stages: blur on the API server, and an optional DINOv2 service for a second look.
-- **Diff without noise** shows what is left of a diff once the noise is masked.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/diff-without-noise-dark.png">
-  <img alt="The test run dialog in Diff without noise mode: a run labelled Likely noise, with only faint traces of the diff left" src="./public/screenshots/diff-without-noise-light.png">
-</picture>
-
-**Baselines and branches**
-- Baseline history: every accepted version of a screenshot, who approved it and when.
-- Feature branches compare against their own baseline or the main branch's; merge one branch's baselines into another.
-- Auto-approve: baselines approved on a feature branch are approved again after the merge.
-- Ignore areas for dates, ads and other parts you cannot control.
-
-**Comparison**
-- Four comparators, chosen per project:
-  - [pixelmatch](https://github.com/mapbox/pixelmatch), pixel by pixel, the default;
-  - [looks-same](https://github.com/gemini-testing/looks-same), perceptual;
-  - [odiff](https://github.com/dmtrKovalenko/odiff), fast, with layout-shift detection;
-  - VLM: pixelmatch plus a vision language model (Ollama, Gemini) that judges whether a person would notice the change ([details](https://github.com/Visual-Regression-Tracker/backend/blob/master/src/compare/libs/vlm/README.md)).
-- Per-project thresholds and diff tolerance.
-- Any platform: web, mobile, desktop, PDF; anything you can screenshot.
-
-**Teams and hosting**
-- Users and roles: admin, editor, guest; sign-in with a password, LDAP or SSO (OIDC).
-- Statistics per project: results per build.
-- Self-hosted with Docker Compose: your database, your images (local disk or S3).
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/settings-dark.png">
-  <img alt="Project settings: comparator, thresholds and the Post-analysis section with the blur and DINOv2 stages" src="./public/screenshots/settings-light.png">
-</picture>
+- Any test framework, any platform: web, mobile, desktop, PDF.
+- Comparators per project: pixelmatch, looks-same, odiff, VLM (Ollama, Gemini).
+- Review: side by side, diff, fade; filters; bulk approve, reject, delete; undo; comments.
+- Rendering-noise hint: Likely change / Likely noise, Diff without noise; blur plus optional DINOv2.
+- Baseline history per screenshot, with who approved and when.
+- Branches: own baselines, merge between branches, auto-approve after merge.
+- Ignore areas.
+- Statistics per project.
+- Users and roles; password, LDAP or SSO (OIDC) sign-in.
+- Self-hosted with Docker Compose; images on local disk or S3.
 
 ## Quick start
 
-You need [Docker](https://docs.docker.com/get-docker/) with Compose v2.
+Needs [Docker](https://docs.docker.com/get-docker/) with Compose v2.
 
 ```sh
 curl -O https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/docker-compose.yml
@@ -87,75 +51,29 @@ mkdir -p imageUploads   # on Linux also: sudo chown -R 1000:1000 imageUploads
 docker compose up -d
 ```
 
-- Open http://localhost:8080 and sign in as `visual-regression-tracker@example.com` / `123456`. The API key of that user is `DEFAULT_USER_API_KEY` in `.env`. **Change both before anyone else can reach the server.**
-- DINOv2 stage of the noise check: `docker compose --profile dinov2 up -d` and uncomment `DINOV2_URL` in `.env`.
-- Access from other machines: replace `localhost` in `REACT_APP_API_URL` and `APP_FRONTEND_URL` with a name or IP they can resolve.
-- Upgrading from 5.x: follow [Upgrade from 5.x](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Upgrade-from-5.x); the database moves to PostgreSQL 18.
-- All settings: [Configuration](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Configuration).
-
-<details>
-<summary>Installation script (Linux, macOS, WSL)</summary>
-
-```
-curl https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/vrt-install.sh -o vrt-install.sh
-chmod a+x vrt-install.sh
-./vrt-install.sh
-```
-
-```
-Usage: ./vrt-install.sh
-
-Arguments:
-    -h | --help
-    -a | --frontend-url <url>   Set the Front-end url. Default: http://localhost:8080
-    -r | --backend-url <url>    Set the API url. Default: http://localhost:4200
-    --jwt-secret <secret>       Set the JWT secret. Default: randomly generated
-```
-</details>
-
-<details>
-<summary>Logs in Elasticsearch and Kibana</summary>
-
-For admins who monitor VRT through Kibana; Elasticsearch keeps the logs and needs more memory and CPU.
-
-1. Clone this repository and go to its folder. In `.env`, set `JWT_SECRET` (`openssl rand -hex 32`) and check `REACT_APP_API_URL`.
-2. Start one of:
-   - with a new Elastic stack: `docker compose -f docker-compose.yml -f docker-compose.elastic.logging.yml up`
-   - with your organisation's Elasticsearch: set its hosts in `filebeat/config/filebeat.yml` and `ELASTIC_URL` in `.env`, then `docker compose -f docker-compose.yml -f docker-compose.logging.yml up`
-3. If Filebeat stops with `config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`, follow the [Elastic instructions](https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html) and start again.
-</details>
+- UI: http://localhost:8080, user `visual-regression-tracker@example.com` / `123456`, API key `DEFAULT_USER_API_KEY` in `.env`. Change both.
+- Or run [`vrt-install.sh`](vrt-install.sh) (Linux, macOS, WSL).
+- [Configuration](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Configuration) · [Upgrade from 5.x](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Upgrade-from-5.x) · [Logs in Elasticsearch](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Logs-in-Elasticsearch)
 
 ## Integrations
 
-| | Package |
-|---|---|
-| Playwright | [agent-playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright) |
-| Cypress | [agent-cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress) |
-| CodeceptJS | [agent-codeceptjs](https://github.com/Visual-Regression-Tracker/agent-codeceptjs) |
-| Robot Framework | [robotframework-VRTLibrary](https://github.com/NiceProjectPoland/robotframework-VRTLibrary) (community) |
-| JavaScript / TypeScript | [sdk-js](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js) |
-| Java | [sdk-java](https://github.com/Visual-Regression-Tracker/sdk-java) |
-| Python | [sdk-python](https://github.com/Visual-Regression-Tracker/sdk-python) |
-| .NET | [sdk-dotnet](https://github.com/Visual-Regression-Tracker/sdk-dotnet) |
-| Anything else | REST API, Swagger at `http://localhost:4200/api` |
-
-- Which client version fits your server: [How to choose the right SDK / agent version](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-choose-right-SDK---agent-version).
+- Agents: [Playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright) · [Cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress) · [CodeceptJS](https://github.com/Visual-Regression-Tracker/agent-codeceptjs) · [Robot Framework](https://github.com/NiceProjectPoland/robotframework-VRTLibrary) (community)
+- SDKs: [JavaScript](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js) · [Java](https://github.com/Visual-Regression-Tracker/sdk-java) · [Python](https://github.com/Visual-Regression-Tracker/sdk-python) · [.NET](https://github.com/Visual-Regression-Tracker/sdk-dotnet)
+- REST API: Swagger at `http://localhost:4200/api`
 - Examples: [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js) · [Java](https://github.com/Visual-Regression-Tracker/examples-java) · [Python](https://github.com/Visual-Regression-Tracker/examples-python) · [.NET](https://github.com/Visual-Regression-Tracker/examples-dotnet)
-- Guides: [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress) · [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright) · [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook) · [Selenide](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide) · [Jenkins](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-publish-VRT-result-in-jenkins) · [Images and PDF from a folder](https://github.com/Visual-Regression-Tracker/examples-java/tree/master/standalone-from-folder-maven) · [Set up on a remote machine (video)](https://www.youtube.com/watch?v=cPsHeKnqL2M)
+- [Which client version to use](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-choose-right-SDK---agent-version)
 
 ## Glossary
 
 - **Project**: builds and test variations of one product.
 - **Build**: the test runs of one CI run.
 - **Test run**: one screenshot compared with its baseline.
-- **Test variation**: the history of baselines for one name + branch + OS + browser + viewport + device.
-- **Baseline**: the accepted screenshot that the next run is compared with.
+- **Test variation**: baseline history for one name + branch + OS + browser + viewport + device.
+- **Baseline**: the accepted screenshot.
 
 ## Contributing
 
-- Try it and open issues with ideas, questions and bugs.
-- Tell us what you think in the [1-minute survey](https://forms.gle/DidGSodojQ4Qn4is6) or on [Telegram](https://t.me/visual_tracker).
-- SDKs for more languages and agents for more frameworks are welcome.
+Issues, ideas and new SDKs or agents are welcome. Feedback: [survey](https://forms.gle/DidGSodojQ4Qn4is6) · [Telegram](https://t.me/visual_tracker).
 
 ## Contributors ✨
 

@@ -21,6 +21,7 @@
 - [Upgrade from 5.x](Upgrade-from-5.x)
 - [VRT architecture](VRT-Architecture)
 - [Kubernetes example](Kubernetes-Configuration-Example)
+- [Logs in Elasticsearch](Logs-in-Elasticsearch)
 
 **Connect your tests**
 - [SDK / agent version](How-to-choose-right-SDK---agent-version)

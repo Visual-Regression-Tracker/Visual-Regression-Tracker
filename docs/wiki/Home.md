@@ -28,6 +28,7 @@ This wiki describes VRT 6.0. If you are on 5.x, start with [Upgrade from 5.x](Up
 - [Upgrade from 5.x](Upgrade-from-5.x)
 - [VRT architecture](VRT-Architecture)
 - [Kubernetes configuration example](Kubernetes-Configuration-Example)
+- [Logs in Elasticsearch and Kibana](Logs-in-Elasticsearch)
 
 ## Connect your tests
 
