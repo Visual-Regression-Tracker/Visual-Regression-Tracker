@@ -6,7 +6,7 @@ In case no baseline or diff is found, the service tries to find an already appro
 A test run that was approved automatically gets the status `autoApproved`, shown as **Auto-approved**.
 The API logs contain trace info about the baseline taken as the reason to auto approve (`docker compose logs api`).
 
-Since 4.13 this is a setting of each project, on for new projects. The `AUTO_APPROVE_BASED_ON_HISTORY` variable from `.env` is no longer read.
+Since 4.14 this is a setting of each project, on for new projects. The `AUTO_APPROVE_BASED_ON_HISTORY` variable from `.env` is no longer read.
 
 ## Algorithm 
 When the feature is enabled and after image comparison the test run status is not `ok`, we try to auto-approve based on history.
