@@ -33,10 +33,8 @@ The build header shows the progress while runs are analysed.
 ## Read the result
 
 - The run list has a **Noise** column and a **Noise** filter chip with **Likely change**, **Likely noise** and **Not analysed**. Both are hidden while the check is off for the project.
-- The build header says, for example, "5 of 28 unresolved look like rendering noise · analysed 28 of 28" and has **Show them**.
 - In the run dialog the chip shows the label and score. Click it to see what each stage said (blur and DINOv2) and to show the areas that stage judged.
 - **Can't tell** means there is no verdict, for example because the images differ in size.
-- When most of a build's differences are noise, a banner suggests a renderer change and recommends filtering likely noise to review it in one pass.
 
 The view mode **Diff without noise** in the run dialog shows what is left of the diff when the noise is masked.
 

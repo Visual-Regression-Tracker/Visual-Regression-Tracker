@@ -19,8 +19,6 @@ The **Build menu** (the ⋯ button) has:
 
 Select several builds in the list to delete them together.
 
-When the noise check has run, the header also shows a line such as "5 of 28 unresolved look like rendering noise · analysed 28 of 28".
-
 ## Run list
 
 Runs are shown as a table or a grid of cards; switch with the **Table view** and **Grid view** toggle. The **View** menu sets:
