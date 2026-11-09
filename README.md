@@ -16,7 +16,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/diff-dark.png">
-  <img alt="A test run in review: the baseline on the left, the new screenshot with the changed price and button highlighted on the right" src="./public/screenshots/diff-light.png">
+  <img alt="A test run in review, Diff view: the baseline on the left, the changed price and button highlighted on the new screenshot; the header says Likely change" src="./public/screenshots/diff-light.png">
 </picture>
 
 ## How it works
@@ -31,27 +31,29 @@ Your CI gets the result immediately; your team reviews in one place.
 
 ### Review faster: changes first, rendering noise flagged
 
-Different machines draw the same page a little differently: fonts, anti-aliasing, GPU. Those diffs used to bury the real ones. 6.0 checks unresolved runs on request and labels each one **Likely change** or **Likely noise**, so you can sort and filter the build and review the real changes first. It is a hint: it never approves anything, and it shows you the areas it judged.
+Different machines draw the same page a little differently: fonts, anti-aliasing, GPU. Those diffs used to bury the real ones. 6.0 checks unresolved runs on request (**Analyse noise** in the build menu, the selection bar or a run) and labels each one **Likely change** or **Likely noise**, so you can filter the build and review the real changes first. It is a hint: it never approves anything, and it shows you the areas it judged.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/noise-build-dark.png">
-  <img alt="A build of 28 unresolved runs with a Noise column: most say Likely change, some say Likely noise" src="./public/screenshots/noise-build-light.png">
+  <img alt="A build filtered to its Likely noise runs, all four selected, with Approve, Reject and Analyse noise in the selection bar" src="./public/screenshots/noise-build-light.png">
 </picture>
 
-The check runs in two stages, set in the project's **Post-analysis** section. The blur stage runs on the API server. The optional DINOv2 stage (`--profile dinov2`) takes a second look at what blur calls noise, and catches faint icons and borders. On our benchmark of 120 real regressions under real rendering noise: blur alone keeps 92 of them as changes, both stages 102, with no false alarms on the noise.
+The check runs in two stages, set in the project's **Post-analysis** section. The blur stage runs on the API server. The optional DINOv2 stage (`--profile dinov2`) takes a second look at what blur calls noise, and catches faint icons and borders. On our benchmark of 120 real regressions under real rendering noise: blur alone keeps 92 of them as changes, both stages 102, with no false alarms on the noise. The check is off until you switch it on there.
+
+In the run dialog, **Diff without noise** masks what the check called noise and shows what is left of the diff.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/change-run-dark.png">
-  <img alt="The test run dialog with the rendering-noise panel: blur sees a change, DINOv2 not needed" src="./public/screenshots/change-run-light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/diff-without-noise-dark.png">
+  <img alt="The test run dialog in Diff without noise mode: a run labelled Likely noise, with only faint traces of the diff left" src="./public/screenshots/diff-without-noise-light.png">
 </picture>
 
 ### Undo a decision
 
-Approved the wrong screenshot? Every approve and reject shows **Undo** for a few seconds. Undo of a feature-branch approval also brings back that branch's ignore areas and comment. When two people decide on the same run at once, only the decision that took effect gets Undo.
+Approved the wrong screenshot? Bulk decisions, and decisions that move on to the next run, show **Undo** in the toast. An approved or rejected run keeps **Undo approval** or **Undo rejection** in its dialog until someone changes it. Undo of a feature-branch approval also brings back that branch's ignore areas and comment.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/undo-dark.png">
-  <img alt="The Approved toast with an Undo button over a test run from a feature branch" src="./public/screenshots/undo-light.png">
+  <img alt="The test run dialog right after Approve: the Approved toast and Undo approval in the footer" src="./public/screenshots/undo-light.png">
 </picture>
 
 ### Find your projects
@@ -60,16 +62,16 @@ Star the projects you work on. Favourites and recently opened projects come firs
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/projects-dark.png">
-  <img alt="The project list with a Favourites section above the other projects" src="./public/screenshots/projects-light.png">
+  <img alt="The project list: Favourites, Recently opened, then the other projects" src="./public/screenshots/projects-light.png">
 </picture>
 
 ### A new look, in light and dark
 
-A redesigned UI on React 19 and MUI 9, with a dark theme that follows your system until you pick one.
+A redesigned UI on React 19 and MUI 9, with a dark theme that follows your system until you pick one. A project page has tabs for Builds, Variations, Statistics and Settings; the run list has filter chips, a Noise column, a **View** menu (table or grid, grouping, diff) and a selection bar for bulk actions.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/build-dark.png">
-  <img alt="A build with mixed results: new, unresolved and passed runs with their tags" src="./public/screenshots/build-light.png">
+  <img alt="A build of eleven runs: eight unresolved, each labelled Likely change or Likely noise, and three passed" src="./public/screenshots/build-light.png">
 </picture>
 
 ### Secure by default
