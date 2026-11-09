@@ -9,97 +9,66 @@
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
-  <a href="#whats-new-in-60">What's new in 6.0</a> ·
+  <a href="#features">Features</a> ·
   <a href="#integrations">Integrations</a> ·
+  <a href="https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki">Documentation</a> ·
   <a href="https://t.me/visual_tracker">Telegram</a>
 </p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/diff-dark.png">
-  <img alt="A test run in review, Diff view: the baseline on the left, the changed price and button highlighted on the new screenshot; the header says Likely change" src="./public/screenshots/diff-light.png">
+  <img alt="A test run in review, Diff view: the baseline on the left, the changed price and button highlighted on the new screenshot" src="./public/screenshots/diff-light.png">
 </picture>
 
 ## How it works
 
-1. Your tests take screenshots, with any framework, on any platform, and send them to VRT through an agent, an SDK or the REST API.
-2. VRT compares each screenshot with its accepted baseline for the same name, branch, browser, OS, viewport and device.
-3. Unchanged screenshots pass. Changed ones wait for review in the UI: approve to make the new screenshot the baseline, reject to keep the old one.
+- **Send:** your tests take screenshots and send them to VRT through an agent, an SDK or the REST API.
+- **Compare:** VRT compares each screenshot with the accepted baseline for the same name, branch, browser, OS, viewport and device.
+- **Review:** unchanged screenshots pass at once. Changed ones wait in the UI: approve makes the new screenshot the baseline, reject keeps the old one.
 
-Your CI gets the result immediately; your team reviews in one place.
+## Features
 
-## What's new in 6.0
-
-### Review faster: changes first, rendering noise flagged
-
-Different machines draw the same page a little differently: fonts, anti-aliasing, GPU. Those diffs used to bury the real ones. 6.0 checks unresolved runs on request (**Analyse noise** in the build menu, the selection bar or a run) and labels each one **Likely change** or **Likely noise**, so you can filter the build and review the real changes first. It is a hint: it never approves anything, and it shows you the areas it judged.
+**Review**
+- Builds and test runs with filters by status, tag and noise; table or grid view.
+- Side by side, diff and fade views of a screenshot against its baseline.
+- Approve, reject or delete many runs at once, with a result for each.
+- Undo an approval or a rejection.
+- Comments on runs.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/noise-build-dark.png">
-  <img alt="A build filtered to its Likely noise runs, all four selected, with Approve, Reject and Analyse noise in the selection bar" src="./public/screenshots/noise-build-light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/build-dark.png">
+  <img alt="A build of eleven runs: unresolved runs labelled Likely change or Likely noise, and passed runs" src="./public/screenshots/build-light.png">
 </picture>
 
-The check runs in two stages, set in the project's **Post-analysis** section. The blur stage runs on the API server. The optional DINOv2 stage (`--profile dinov2`) takes a second look at what blur calls noise, and catches faint icons and borders. On our benchmark of 120 real regressions under real rendering noise: blur alone keeps 92 of them as changes, both stages 102, with no false alarms on the noise. The check is off until you switch it on there.
-
-In the run dialog, **Diff without noise** masks what the check called noise and shows what is left of the diff.
+**Rendering noise**
+- Flags unresolved runs as **Likely change** or **Likely noise**, so real changes are reviewed first. A hint only: it never approves anything.
+- Two stages: blur on the API server, and an optional DINOv2 service for a second look.
+- **Diff without noise** shows what is left of a diff once the noise is masked.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/diff-without-noise-dark.png">
   <img alt="The test run dialog in Diff without noise mode: a run labelled Likely noise, with only faint traces of the diff left" src="./public/screenshots/diff-without-noise-light.png">
 </picture>
 
-### Undo a decision
+**Baselines and branches**
+- Baseline history: every accepted version of a screenshot, who approved it and when.
+- Feature branches compare against their own baseline or the main branch's; merge one branch's baselines into another.
+- Auto-approve: baselines approved on a feature branch are approved again after the merge.
+- Ignore areas for dates, ads and other parts you cannot control.
 
-Approved the wrong screenshot? Bulk decisions, and decisions that move on to the next run, show **Undo** in the toast. An approved or rejected run keeps **Undo approval** or **Undo rejection** in its dialog until someone changes it. Undo of a feature-branch approval also brings back that branch's ignore areas and comment.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/undo-dark.png">
-  <img alt="The test run dialog right after Approve: the Approved toast and Undo approval in the footer" src="./public/screenshots/undo-light.png">
-</picture>
-
-### Find your projects
-
-Star the projects you work on. Favourites and recently opened projects come first in the project list and in the project switcher, and both have search.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/projects-dark.png">
-  <img alt="The project list: Favourites, Recently opened, then the other projects" src="./public/screenshots/projects-light.png">
-</picture>
-
-### A new look, in light and dark
-
-A redesigned UI on React 19 and MUI 9, with a dark theme that follows your system until you pick one. A project page has tabs for Builds, Variations, Statistics and Settings; the run list has filter chips, a Noise column, a **View** menu (table or grid, grouping, diff) and a selection bar for bulk actions.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/build-dark.png">
-  <img alt="A build of eleven runs: eight unresolved, each labelled Likely change or Likely noise, and three passed" src="./public/screenshots/build-light.png">
-</picture>
-
-### Secure by default
-
-- No public signing key: the API does not start without your own `JWT_SECRET`.
-- Live updates need a login and reach only the people looking at that project or build.
-- The containers run as an unprivileged user, on PostgreSQL 18 and Node 26.
-- Clear HTTP errors (`400`, `404`, `409`, `413`, `422`) instead of `200`/`500`.
-- `REGISTRATION_ENABLED=false` turns off sign-up; SSO (OIDC) maps roles from your identity provider.
-
-Upgrading from 5.x needs a database move to PostgreSQL 18 and a few settings: read the [6.0.0 release notes](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/releases/tag/6.0.0) before you start.
-
-## Features
-
-- **Works with any test framework**: Playwright, Cypress, CodeceptJS, Robot Framework, or your own through an SDK or the REST API.
-- **Any platform**: web, mobile, desktop, PDF; anything you can screenshot.
-- **Branches**: feature branches compare against their own baseline or the main branch's; merge a branch's baselines into another in one call.
-- **Baseline history**: see every accepted version of a screenshot, who approved it and when.
-- **Ignore areas**: mask dates, ads and other parts you cannot control, per screenshot or for a whole run.
-- **Four comparators**, chosen per project:
+**Comparison**
+- Four comparators, chosen per project:
   - [pixelmatch](https://github.com/mapbox/pixelmatch), pixel by pixel, the default;
   - [looks-same](https://github.com/gemini-testing/looks-same), perceptual;
   - [odiff](https://github.com/dmtrKovalenko/odiff), fast, with layout-shift detection;
-  - VLM: pixelmatch plus a vision language model (Ollama, Gemini) that judges whether a human would notice the change ([details](https://github.com/Visual-Regression-Tracker/backend/blob/master/src/compare/libs/vlm/README.md)).
-- **Rendering-noise hint**: see above.
-- **Bulk review**: approve, reject or delete many runs, with a result for each one.
-- **Users and roles**: admin, editor, guest; sign-in with a password, LDAP or SSO (OIDC).
-- **Self-hosted**: Docker Compose, your database, your images (local disk or S3), nothing leaves your network.
+  - VLM: pixelmatch plus a vision language model (Ollama, Gemini) that judges whether a person would notice the change ([details](https://github.com/Visual-Regression-Tracker/backend/blob/master/src/compare/libs/vlm/README.md)).
+- Per-project thresholds and diff tolerance.
+- Any platform: web, mobile, desktop, PDF; anything you can screenshot.
+
+**Teams and hosting**
+- Users and roles: admin, editor, guest; sign-in with a password, LDAP or SSO (OIDC).
+- Statistics per project: results per build.
+- Self-hosted with Docker Compose: your database, your images (local disk or S3).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/screenshots/settings-dark.png">
@@ -118,11 +87,11 @@ mkdir -p imageUploads   # on Linux also: sudo chown -R 1000:1000 imageUploads
 docker compose up -d
 ```
 
-Open http://localhost:8080 and sign in as `visual-regression-tracker@example.com` / `123456`; the API key of that user is in `.env` (`DEFAULT_USER_API_KEY`). **Change both before anyone else can reach the server.**
-
-With the rendering-noise check's DINOv2 stage: `docker compose --profile dinov2 up -d` and uncomment `DINOV2_URL` in `.env`.
-
-To reach VRT from other machines, replace `localhost` in `REACT_APP_API_URL` and `APP_FRONTEND_URL` with a name or IP they can resolve.
+- Open http://localhost:8080 and sign in as `visual-regression-tracker@example.com` / `123456`. The API key of that user is `DEFAULT_USER_API_KEY` in `.env`. **Change both before anyone else can reach the server.**
+- DINOv2 stage of the noise check: `docker compose --profile dinov2 up -d` and uncomment `DINOV2_URL` in `.env`.
+- Access from other machines: replace `localhost` in `REACT_APP_API_URL` and `APP_FRONTEND_URL` with a name or IP they can resolve.
+- Upgrading from 5.x: follow [Upgrade from 5.x](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Upgrade-from-5.x); the database moves to PostgreSQL 18.
+- All settings: [Configuration](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Configuration).
 
 <details>
 <summary>Installation script (Linux, macOS, WSL)</summary>
@@ -145,45 +114,6 @@ Arguments:
 </details>
 
 <details>
-<summary>Upgrade from 5.x: the API runs as uid 1000</summary>
-
-Since 6.0, the API and migration images run as uid 1000 instead of root, and dinov2 as `nobody` (65534). VRT 5.x ran as root, so on an existing install `./imageUploads` and any TLS files belong to root. Before the first start of 6.0, give them to uid 1000:
-
-```
-sudo chown -R 1000:1000 ./imageUploads ./ssl
-```
-
-Otherwise the API stops with `… is not writable by uid 1000 (EACCES): chown -R 1000:1000 …`. `vrt-install.sh` does this for `./imageUploads`. On macOS with Docker Desktop the chown is not needed. A new named Docker volume instead of the bind mount needs nothing. The UI keeps reading the same folder.
-</details>
-
-<details>
-<summary>Upgrade the database from PostgreSQL 12</summary>
-
-Since 6.0, `docker-compose.yml` runs PostgreSQL 18 and keeps its data in `./db/18/docker`. PostgreSQL 18 cannot read a database created by PostgreSQL 12 (VRT 5.x): it refuses to start on the old `./db` folder and leaves it as it is. Copy the database once with `pg_dump` and `pg_restore`, or with any tool you prefer. The images in `./imageUploads` are not part of the database and stay where they are. A database outside the bundled `postgres` service needs nothing.
-
-In the folder with `docker-compose.yml` and `.env`, in a Linux, macOS or WSL shell (PowerShell's `>` and `<` do not pass the binary dump through):
-
-1. Stop the UI and the API, so nothing is written after the dump, and dump the database:
-
-```
-docker compose stop ui api
-docker compose exec -T postgres sh -c 'pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB"' > vrt-pg12.dump
-```
-
-2. Move the old data aside with `docker compose down && mv db db-pg12`, then take the new `docker-compose.yml` and `.env` as in **Quick start** (carry over your settings, keep the old `docker-compose.yml` for a rollback).
-3. Start the new database and restore the dump into it:
-
-```
-docker compose up -d --wait postgres
-docker compose exec -T postgres sh -c 'pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --exit-on-error' < vrt-pg12.dump
-```
-
-4. Start VRT: `docker compose up -d`. Once it works, delete `./db-pg12` (`sudo` may be needed) and `vrt-pg12.dump`.
-
-To go back: `docker compose down`, `mv db db-new && mv db-pg12 db`, put back the old `docker-compose.yml` and run `docker compose up -d`.
-</details>
-
-<details>
 <summary>Logs in Elasticsearch and Kibana</summary>
 
 For admins who monitor VRT through Kibana; Elasticsearch keeps the logs and needs more memory and CPU.
@@ -197,21 +127,21 @@ For admins who monitor VRT through Kibana; Elasticsearch keeps the logs and need
 
 ## Integrations
 
-| | Package | 6.0 server |
-|---|---|---|
-| Playwright | [agent-playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright) | 5.5.0+ |
-| Cypress | [agent-cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress) | 5.9.0+ |
-| CodeceptJS | [agent-codeceptjs](https://github.com/Visual-Regression-Tracker/agent-codeceptjs) | |
-| Robot Framework | [robotframework-VRTLibrary](https://github.com/NiceProjectPoland/robotframework-VRTLibrary) (community) | |
-| JavaScript / TypeScript | [sdk-js](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js) | 5.9.0+ |
-| Java | [sdk-java](https://github.com/Visual-Regression-Tracker/sdk-java) | 5.6.1+ |
-| Python | [sdk-python](https://github.com/Visual-Regression-Tracker/sdk-python) | 5.1.0+ |
-| .NET | [sdk-dotnet](https://github.com/Visual-Regression-Tracker/sdk-dotnet) | 5.1.0+ |
-| Anything else | REST API, Swagger at `http://localhost:4200/api` | |
+| | Package |
+|---|---|
+| Playwright | [agent-playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright) |
+| Cypress | [agent-cypress](https://www.npmjs.com/package/@visual-regression-tracker/agent-cypress) |
+| CodeceptJS | [agent-codeceptjs](https://github.com/Visual-Regression-Tracker/agent-codeceptjs) |
+| Robot Framework | [robotframework-VRTLibrary](https://github.com/NiceProjectPoland/robotframework-VRTLibrary) (community) |
+| JavaScript / TypeScript | [sdk-js](https://www.npmjs.com/package/@visual-regression-tracker/sdk-js) |
+| Java | [sdk-java](https://github.com/Visual-Regression-Tracker/sdk-java) |
+| Python | [sdk-python](https://github.com/Visual-Regression-Tracker/sdk-python) |
+| .NET | [sdk-dotnet](https://github.com/Visual-Regression-Tracker/sdk-dotnet) |
+| Anything else | REST API, Swagger at `http://localhost:4200/api` |
 
-Examples: [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js) · [Java](https://github.com/Visual-Regression-Tracker/examples-java) · [Python](https://github.com/Visual-Regression-Tracker/examples-python) · [.NET](https://github.com/Visual-Regression-Tracker/examples-dotnet)
-
-Guides: [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress) · [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright) · [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook) · [Selenide](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide) · [Jenkins](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-publish-VRT-result-in-jenkins) · [Images and PDF from a folder](https://github.com/Visual-Regression-Tracker/examples-java/tree/master/standalone-from-folder-maven) · [Set up on a remote machine (video)](https://www.youtube.com/watch?v=cPsHeKnqL2M)
+- Which client version fits your server: [How to choose the right SDK / agent version](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-choose-right-SDK---agent-version).
+- Examples: [JavaScript](https://github.com/Visual-Regression-Tracker/vrt-examples-js) · [Java](https://github.com/Visual-Regression-Tracker/examples-java) · [Python](https://github.com/Visual-Regression-Tracker/examples-python) · [.NET](https://github.com/Visual-Regression-Tracker/examples-dotnet)
+- Guides: [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Cypress) · [Playwright](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Playwright) · [Storybook](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Storybook) · [Selenide](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/Getting-started-with-Selenide) · [Jenkins](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/wiki/How-to-publish-VRT-result-in-jenkins) · [Images and PDF from a folder](https://github.com/Visual-Regression-Tracker/examples-java/tree/master/standalone-from-folder-maven) · [Set up on a remote machine (video)](https://www.youtube.com/watch?v=cPsHeKnqL2M)
 
 ## Glossary
 
@@ -223,7 +153,9 @@ Guides: [Cypress](https://github.com/Visual-Regression-Tracker/Visual-Regression
 
 ## Contributing
 
-Try it, open issues with ideas, questions and bugs, and tell us what you think in the [1-minute survey](https://forms.gle/DidGSodojQ4Qn4is6) or on [Telegram](https://t.me/visual_tracker). SDKs for more languages and agents for more frameworks are welcome.
+- Try it and open issues with ideas, questions and bugs.
+- Tell us what you think in the [1-minute survey](https://forms.gle/DidGSodojQ4Qn4is6) or on [Telegram](https://t.me/visual_tracker).
+- SDKs for more languages and agents for more frameworks are welcome.
 
 ## Contributors ✨
 
