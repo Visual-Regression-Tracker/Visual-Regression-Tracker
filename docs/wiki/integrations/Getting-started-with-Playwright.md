@@ -1,61 +1,68 @@
-Let’s write some tests in JS with **Playwright** and **agent-playwright** library for integration with **Visual Regression Tracker**
+# Getting started with Playwright
 
-### Test scenario
-1. Open google homepage
-1. Validate screenshot 
-1. Search by keyword `Visual regression tracker`
-1. Validate screenshot 
+Write a test in JS with **Playwright** and **agent-playwright**.
 
-### Prerequisites 
-* Visual regression tracker service is up and running. [Setup steps](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker#set-up)
+Scenario:
 
-### Clone example project [Visual-Regression-Tracker/examples-js](https://github.com/Visual-Regression-Tracker/examples-js)
-`$ git clone https://github.com/Visual-Regression-Tracker/examples-js.git`
+1. Open the Google homepage and check the screenshot.
+2. Search for `Visual regression tracker` and check the screenshot.
 
-`$ cd examples-js/agent-playwright`
+## Prerequisites
 
-`$ npm install`
+VRT is running: [Getting started](Getting-started).
 
-### Update configuration
-Open `playwright.spec.ts` and update `config` object
+## Clone the example
+
+```sh
+git clone https://github.com/Visual-Regression-Tracker/examples-js.git
+cd examples-js/agent-playwright
+npm install
 ```
+
+## Configure
+
+Edit the `config` object in `playwright.spec.ts`:
+
+```ts
 const config: Config = {
- apiUrl: "http://localhost:4200",
- branchName: "develop",
- project: "projectId",
- apiKey: "apiKey", 
+  apiUrl: "http://localhost:4200",
+  branchName: "develop",
+  project: "projectId",
+  apiKey: "apiKey",
 };
-
 ```
 
-### Run tests
-`$ npm run test:agent_playwright `
+## Run
 
-Test failed as baseline was not found, follow by url, review image and accept it
-![Run tests](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/run_new_test.gif)
+1. `npm run test:agent_playwright`
+2. The test fails: there is no baseline yet.
+3. Open the link, review the image and approve it.
 
-### Accept baseline for every assertion
-Repeat previous step for every assertion
+![Run tests](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/run_new_test.gif)
 
-Now we have all needed baselines so next time we run the test it may fail if the image is different from the baseline
+Approve a baseline for every assertion. Later runs fail if the image differs.
 
-### Diff found
-In case difference is greater than acceptable threshold it will be highlighted
-![Diff found](https://api.monosnap.com/file/download?id=vCMvSdItaOaUgUDBx8E4dDNVjDblvz)
+## Diff found
 
-### Ignore areas
-In case image contains part that should be ignored during searching for diff we could mark them
-![Ignore areas](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/ignore_area.gif?raw=true)> 
+A difference above the tolerance is highlighted in the [Run dialog](Run-dialog).
 
-### TestVariation history 
-Through the time you will be replacing the baseline image with the most recent one. Still it’s possible to revisit the whole history of baseline changes 
+## Ignore areas
 
-### Image dimension mismatch
-In case the page height depends on content (like google search result page) it’s likely to get different image sizes so pixel by pixel comparison would not work. Take control of this data to keep test results consistent.
+Mark parts of the image to leave out of the comparison.
 
+![Ignore areas](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/ignore_area.gif)
 
-### How to improve stability
-* Control animation on the page - any moving part gonna bright flakiness in your tests so find the fay to control or disable it
-* Handle dynamic data - don’t forget to prepare system under test for taking a screenshot by setting up needed precondition 
-* Third party iframes - mark them with ignore regions or mock third party data
-* Take screenshots using reproducible environment 
+## History
+
+Every baseline change is kept: [Variations and history](Variations-and-history).
+
+## Image size mismatch
+
+Pages with variable height give different image sizes. Control the content to keep results stable.
+
+## Stability tips
+
+- Disable or control animations.
+- Prepare dynamic data before the screenshot.
+- Mark third-party iframes as ignore areas, or mock them.
+- Take screenshots in a reproducible environment.

@@ -1,42 +1,45 @@
-## Intro
-[Storybook](https://storybook.js.org/) provide you with ability to test your frontend components in isolated environment and helps to showcase how they works and looks with different configurations. 
+# Storybook
 
-Here you could see some [examples](https://storybook.js.org/docs/examples/)
+Test components of a [Storybook](https://storybook.js.org/) with jest, playwright and agent-playwright.
 
-For learning purposes we gonna test open-source collection of react components to render common data visualization charts [React-vis](https://github.com/uber/react-vis) that has publicly open [Storybook](https://uber.github.io/react-vis/website/dist/storybook/index.html)
+The example tests the public Storybook of [React-vis](https://github.com/uber/react-vis).
 
-Libraries used: 
-* [jest](https://www.npmjs.com/package/jest) 
-* [playwright](https://www.npmjs.com/package/playwright) 
-* [@visual-regression-tracker/agent-playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
+Libraries:
 
-## Set up Visual Regression Tracker
-* To have it up and running, please, follow [these steps](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker#set-up)
-* Create new project 
-* Copy `apiKey` and `projectId`
+- [jest](https://www.npmjs.com/package/jest)
+- [playwright](https://www.npmjs.com/package/playwright)
+- [@visual-regression-tracker/agent-playwright](https://www.npmjs.com/package/@visual-regression-tracker/agent-playwright)
 
-## Create test project
-1. Create new folder `$ mkdir storybook_example`
-1. Init npm project `$ npm init`
-1. Install needed dependencies `$ npm install jest playwright @visual-regression-tracker/agent-playwright`
-1. Create file for test `scr/storybook.spec.js`
+## Set up VRT
 
-## Configure Visual Regression Tracker
-Set up config object with your data
-```
+1. Start VRT: [Getting started](Getting-started).
+2. Create a project.
+3. Copy the `apiKey` and the `projectId`.
+
+## Create the test project
+
+1. `mkdir storybook_example && cd storybook_example`
+2. `npm init`
+3. `npm install jest playwright @visual-regression-tracker/agent-playwright`
+4. Create `scr/storybook.spec.js`.
+
+## Configure
+
+```js
 const config = {
   apiUrl: "http://localhost:4200",
   branchName: "develop",
-  project: "90e3b95d-6468-4771-a2e7-7bc7d3ca2b1b",
-  apiKey: "W5KJ9ZGXRV458AH1XZEJ8WF284ED",
+  project: "<project id>",
+  apiKey: "<your API key>",
 };
-``` 
-
-## Create suite and set up preconditions
-Before test suite we need to start browser and start a VRT build, as well as close the browser and stop the build after.
-
-`PlaywrightVisualRegressionTracker` takes the browser name as a string (`browserType.name()`, e.g. `"chromium"`) and the config object, in that order.
 ```
+
+## Set up the suite
+
+Start the browser and a VRT build before the suite. Close both after it.
+The agent takes the browser name and the config, in that order.
+
+```js
 const { chromium } = require("playwright");
 const {
   PlaywrightVisualRegressionTracker,
@@ -62,90 +65,92 @@ describe("Storybook example", () => {
     await vrt.stop();
   });
 });
-
 ```
-## Add test
-Like described in [Storybook tutorial for visual testing](https://storybook.js.org/docs/testing/automated-visual-testing/) we could access needed component by providing it's parameter in url
 
-Let's define `storybookUrl`
-```
-const storybookUrl = "https://uber.github.io/react-vis/website/dist/storybook/iframe.html"
-```
-And for every component we gonna have different url params.
+## Add a test
 
-Let's start with `Single Area chart`
-```
-const componentUrlParams = "?selectedKind=Series%2FAreaSeries%2FBase&selectedStory=Single%20Area%20chart"
-```
-Concatenation of those strings will load only needed component in iframe
-![mounted component](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/storybook_tutorial/iframe_component.png)
+Load one component in the iframe by URL, as in the
+[Storybook guide](https://storybook.js.org/docs/testing/automated-visual-testing/).
 
-We need navigate to that page and make assertion
-```
-  it("Signle area chart", async () => {
-    const componentUrlParams =
-      "?selectedKind=Series%2FAreaSeries%2FBase&selectedStory=Single%20Area%20chart";
+1. Define the base URL:
 
-    await page.goto(storybookUrl + componentUrlParams);
+   ```js
+   const storybookUrl = "https://uber.github.io/react-vis/website/dist/storybook/iframe.html"
+   ```
 
-    await vrt.track(page, "Single area chart");
-  });
-```
-## Run test
-Let's run test for the first time and accept image as baseline 
+2. Add the test for one component:
 
-`$ npx jest`
+   ```js
+   it("Single area chart", async () => {
+     const componentUrlParams =
+       "?selectedKind=Series%2FAreaSeries%2FBase&selectedStory=Single%20Area%20chart";
 
-![run first](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/storybook_tutorial/run_first.gif)
+     await page.goto(storybookUrl + componentUrlParams);
 
-## Make it parametrised
-To cover more component we could make test parametrised.
+     await vrt.track(page, "Single area chart");
+   });
+   ```
 
-This will run test for every combination of `componentName` and `componentUrlParams` parameters
-```
+![mounted component](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/storybook_tutorial/iframe_component.png)
+
+## Run
+
+1. `npx jest`
+2. Review the image in VRT and approve it as the baseline.
+
+![run first](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/storybook_tutorial/run_first.gif)
+
+## Many components
+
+`it.each` runs the test once per component:
+
+```js
 it.each([
-    [
-      "single VerticalBarSeries",
-      "?selectedKind=Series%2FVerticalBarSeries%2FBase&selectedStory=single%20VerticalBarSeries",
-    ],
-    [
-      "single HorizontalBarSeries",
-      "?selectedKind=Series%2FHorizontalBarSeries%2FBase&selectedStory=single%20HorizontalBarSeries",
-    ],
-    [
-      "Discrete color legend",
-      "?selectedKind=Legends&selectedStory=Discrete%20color%20legend",
-    ],
-    [
-      "Continuous Color Legend",
-      "?selectedKind=Legends&selectedStory=Continuous%20Color%20Legend",
-    ],
+  [
+    "single VerticalBarSeries",
+    "?selectedKind=Series%2FVerticalBarSeries%2FBase&selectedStory=single%20VerticalBarSeries",
+  ],
+  [
+    "single HorizontalBarSeries",
+    "?selectedKind=Series%2FHorizontalBarSeries%2FBase&selectedStory=single%20HorizontalBarSeries",
+  ],
+  [
+    "Discrete color legend",
+    "?selectedKind=Legends&selectedStory=Discrete%20color%20legend",
+  ],
+  [
+    "Continuous Color Legend",
+    "?selectedKind=Legends&selectedStory=Continuous%20Color%20Legend",
+  ],
 ])("%s", async (componentName, componentUrlParams) => {
   await page.goto(storybookUrl + componentUrlParams);
 
   await vrt.track(page, componentName);
 });
-``` 
-## Failed results
-Due to randomised data in some components, every test run for them we gonna have different images and that is unacceptable for visual testing
+```
 
-This is what you see if difference found
-![failed results](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/storybook_tutorial/fail_results.png)
-![diff](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/storybook_tutorial/diff.gif)
+## Failed results
+
+Random data in some components gives a different image on every run. This is what a difference looks like:
+
+![failed results](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/storybook_tutorial/fail_results.png)
+![diff](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/storybook_tutorial/diff.gif)
 
 ## Remove randomness
-It's crucial that you know what you are testing and setup system under test into needed state.
 
-In case your image contains parts where difference not important and should be ignored during comparison - mark this as ignore area 
-![ignore area](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/storybook_tutorial/ignore.gif)
+- Put the system under test into a known state.
+- Mark unimportant parts as ignore areas.
 
-## List of baselines 
-All accepted baselines will be used to assert next versions
-![Test variations](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/blob/master/public/storybook_tutorial/testVariations.png)
+![ignore area](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/storybook_tutorial/ignore.gif)
 
-## Conclusion
-[Source code](https://github.com/Visual-Regression-Tracker/examples-js/tree/master/storybook)
+## Baselines
 
-More examples:
-* [JavaScript](https://github.com/Visual-Regression-Tracker/examples-js)
-* [Java](https://github.com/Visual-Regression-Tracker/examples-java)
+Accepted baselines are used for the next runs.
+
+![Test variations](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/storybook_tutorial/testVariations.png)
+
+## More
+
+- [Source code](https://github.com/Visual-Regression-Tracker/examples-js/tree/master/storybook)
+- [JavaScript examples](https://github.com/Visual-Regression-Tracker/examples-js)
+- [Java examples](https://github.com/Visual-Regression-Tracker/examples-java)

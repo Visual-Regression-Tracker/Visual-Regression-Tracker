@@ -1,23 +1,27 @@
 # Visual Regression Tracker
 
-Visual Regression Tracker (VRT) is a self-hosted tool for visual testing. Your tests take screenshots and send them to VRT. VRT compares each one with its accepted baseline, and your team reviews what changed in one place: approve a change to make it the new baseline, or reject it.
+VRT is a self-hosted tool for visual testing. This wiki describes VRT 6.0.
 
-This wiki describes VRT 6.0. If you are on 5.x, start with [Upgrade from 5.x](Upgrade-from-5.x).
+1. Your tests send screenshots to VRT.
+2. VRT compares each one with its baseline.
+3. Your team approves or rejects what changed.
+
+On 5.x? Start with [Upgrade from 5.x](Upgrade-from-5.x).
 
 ## Start here
 
-- [Getting started](Getting-started): install VRT, sign in, send a first screenshot. The **Help** menu in the UI has a **Documentation** link to this wiki.
-- [Projects](Projects): add projects, favourites, the project switcher.
-- [Builds and runs](Builds-and-runs): what a build and a test run are, filters, bulk actions.
+- [Getting started](Getting-started): install, sign in, first screenshot.
+- [Projects](Projects): add, find and favourite projects.
+- [Builds and runs](Builds-and-runs): filters and bulk actions.
 - [Statuses](Statuses): what New, Unresolved, Approved and the others mean.
 
 ## Review
 
 - [Run dialog](Run-dialog): view modes, ignore areas, comments, Undo.
 - [Noise hint](Noise-hint): flag runs that look like rendering noise.
-- [Variations and history](Variations-and-history): every screen and its baseline versions.
+- [Variations and history](Variations-and-history): screens and baseline versions.
 - [Statistics](Statistics): results per build.
-- [Auto-approve](Auto-approve): approve a merged branch's baselines again automatically.
+- [Auto-approve](Auto-approve): re-approve baselines after a merge.
 
 ## Administration
 

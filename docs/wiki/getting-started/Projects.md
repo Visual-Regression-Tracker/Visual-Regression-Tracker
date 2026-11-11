@@ -1,31 +1,36 @@
 # Projects
 
-A project holds the builds, screens (variations) and baselines of one application under test.
+A project holds the builds, screens and baselines of one application.
+
+![Projects](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/screenshots/projects-light.png)
 
 ## Project list
 
-The **Projects** page shows your projects as cards, in the sections **Favourites** and **Other projects**, each sorted by name. The search box (placeholder "Search projects") looks at the name and the main branch. Press / anywhere on the page to jump to it ("Press / to search").
+- Cards are grouped as **Favourites** and **Other projects**.
+- Search by name or main branch. Press / to jump to the search box.
+- Click a card to open the project.
+- Click the star to add or remove a favourite.
+- **Project settings** opens [Project settings](Project-settings).
+- **Delete project** removes all its builds and baselines.
 
-- Click anywhere on a card to open the project.
-- **Add to favourites** / **Remove from favourites**: the star on a card pins the project to **Favourites**.
-- **Project settings**: opens [Project settings](Project-settings).
-- **Delete project**: removes the project with all its builds and baselines. Editors and admins only.
-
-Guests see the projects but no create, edit or delete actions.
+Guests can see projects but not create, edit or delete them.
 
 ## Add a project
 
-Click **Add project**. It opens its own page, laid out like [Project settings](Project-settings), with the same sections. Set the project name and the main branch and click **Create** (or **Cancel**). The main branch is the branch whose baselines other branches are compared with. Guests cannot open this page.
+1. Click **Add project**.
+2. Enter the project name and the main branch.
+3. Click **Create**.
 
-The project id that your tests need is in the address of the project page, and the **Profile** page fills it into its configuration examples when the project is selected ([Profile and API key](Profile-and-API-key)).
+The main branch is the one other branches are compared with.
 
-## Project switcher
+Your tests need the project id. It is in the address of the project page.
+It is also in the **Configuration examples** of [Profile and API key](Profile-and-API-key).
 
-On a project page, the breadcrumb at the top has a project menu. It groups projects as **Favourites** and **Other projects** and searches as you type.
+## Switch project
 
-## Project page
+Use the project menu in the breadcrumb at the top of a project page.
 
-The project page has the tabs **Builds**, **Variations**, **Statistics** and **Settings**.
+## Project tabs
 
 - [Builds and runs](Builds-and-runs)
 - [Variations and history](Variations-and-history)

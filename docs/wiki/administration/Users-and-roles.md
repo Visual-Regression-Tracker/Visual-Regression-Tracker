@@ -4,23 +4,31 @@
 
 | Role | Can |
 |---|---|
-| Admin | Everything an Editor can do, plus manage users and roles. |
-| Editor | Approve, reject and undo, edit ignore areas, create projects and change their settings. |
-| Guest | View only. New sign-ups start here. A Guest's API key cannot send screenshots (HTTP 403). |
+| Admin | Everything an Editor can, plus manage users and roles. |
+| Editor | Approve, reject, undo, edit ignore areas, create projects, change settings. |
+| Guest | View only. New sign-ups start here. Its API key gets HTTP 403. |
 
-The API key your CI uses must belong to an Editor or an Admin.
+The API key your CI uses must belong to an Editor or Admin.
 
 ## Users page
 
-Admins see **Users** in the header menu. The list has a search box (name or email), a **Role** filter, and the columns **Person**, **Role** and **Joined**. The roles are explained in a card beside the list.
+Admins open **Users** in the header menu.
 
-- **Change role**: select users, then pick a role in the selection bar, or change it in the **Role** column.
+- Search by name or email. Filter by **Role**.
+- **Change role**: select users and pick a role, or use the **Role** column.
 - **Delete**: removes the selected users.
+
+Admins cannot create users in the UI.
 
 ## Sign-in methods
 
-- Password: users register themselves on the sign-in page and start as Guest. Set `REGISTRATION_ENABLED=false` to turn off sign-up; there is no way to create users in the UI, so users then come only from LDAP or SSO. Admins can change roles and delete users, not create them.
-- LDAP: enabled with the `LDAP_*` settings.
-- SSO (OpenID Connect): enabled with the `OIDC_*` settings. Users are created on their first login and their role comes from the identity provider on every login. Password login and registration are off while SSO is on.
+- **Password:** users register themselves and start as Guest.
+  - `REGISTRATION_ENABLED=false` turns off sign-up.
+  - Users then come only from LDAP or SSO.
+- **LDAP:** the `LDAP_*` settings.
+- **SSO (OpenID Connect):** the `OIDC_*` settings.
+  - Users are created at first login.
+  - The role comes from the provider at every login.
+  - Password login and sign-up are off.
 
 See [Configuration](Configuration).

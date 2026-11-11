@@ -1,21 +1,27 @@
-Available since [release 4.9.0](https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker/releases/tag/4.9.0)
+# Auto-approve
 
-After a baseline is accepted in a feature branch and the code is merged into the project's main branch, the baseline has to be approved again.
-With **Auto approve** switched on in the project's settings (section **Review**, see [Project settings](Project-settings)), VRT approves it for you.
-In case no baseline or diff is found, the service tries to find an already approved baseline among other branches and compares it against the image candidate.
-A test run that was approved automatically gets the status `autoApproved`, shown as **Auto-approved**.
-The API logs contain trace info about the baseline taken as the reason to auto approve (`docker compose logs api`).
+After a branch is merged, VRT can approve its baselines again for you. Available since 4.9.0.
 
-Since 4.14 this is a setting of each project, on for new projects. The `AUTO_APPROVE_BASED_ON_HISTORY` variable from `.env` is no longer read.
+## Turn it on
 
-## Algorithm 
-When the feature is enabled and after image comparison the test run status is not `ok`, we try to auto-approve based on history.
+1. Open the project's **Settings** tab, section **Review**.
+2. Turn on **Auto approve**. It is on for new projects.
+3. Click **Save**.
 
-Steps
-1. Find test runs that are `approved`, have the same unique attributes and (if exists) baseline image 
-1. For already approved test runs find their current baselines 
-1. Compare image against baseline for already approved test
+See [Project settings](Project-settings). The `AUTO_APPROVE_BASED_ON_HISTORY` variable is no longer read.
 
-Auto approve the test run in case it matches - set the test run status `autoApproved`.
+## How it works
 
-Auto-approved runs cannot be undone with **Undo**. The [Noise hint](Noise-hint) never triggers auto-approve.
+After a comparison, if the run is not `ok`:
+
+1. Find approved runs of the same screen.
+2. Find their current baselines.
+3. Compare the new image with them.
+
+On a match the run gets the status **Auto-approved** (`autoApproved`).
+
+## Good to know
+
+- Auto-approved runs cannot be undone.
+- The [Noise hint](Noise-hint) never triggers it.
+- The API logs show the baseline used: `docker compose logs api`.

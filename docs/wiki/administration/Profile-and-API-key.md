@@ -4,14 +4,21 @@ Open **Profile** from the header menu.
 
 ## Your details
 
-Change your **First name** and **Last name**, and your password (**New password**). With SSO the password is locked. Your role is shown, but only an admin can change it ([Users and roles](Users-and-roles)).
+- Change **First name**, **Last name** and **New password**.
+- With SSO the password is locked.
+- Only an admin can change your role: [Users and roles](Users-and-roles).
 
 ## API key
 
-Your API key identifies your tests when they send screenshots. Copy it with the copy button. **Regenerate** creates a new key: CI jobs that use the current key stop working until you give them the new one.
+Your tests use it to send screenshots.
 
-Regenerate the key, and change your password, if you think either has leaked.
+1. Click the copy button to copy it.
+2. Click **Regenerate** for a new key. CI jobs with the old key stop working.
+
+Regenerate the key and change your password if either leaked.
 
 ## Configuration examples
 
-The page shows your test setup as a config file (`vrt.json`, saved in the project root) or as environment variables for your CI. They contain the API URL and the selected project; add your API key.
+- A `vrt.json` file for the project root, or environment variables for CI.
+- They contain the API URL and the selected project.
+- Add your API key.

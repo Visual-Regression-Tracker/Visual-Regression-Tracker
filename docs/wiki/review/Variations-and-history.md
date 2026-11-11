@@ -1,19 +1,28 @@
 # Variations and history
 
-A **variation** is one screen as VRT tracks it: the screenshot name together with the branch, OS, browser, viewport, device and custom tags. A variation appears when a build sends its first screenshot of a screen. Each variation has a baseline, the screenshot new ones are compared with.
+A **variation** is one screen: its name plus branch, OS, browser, viewport, device and tags.
+Each variation has a baseline that new screenshots are compared with.
 
 ## Variations tab
 
-The **Variations** tab lists the variations of the project as cards with a preview. Filter them by **Branch**, **Browser**, **Device**, **OS**, **Tags** and **Viewport**, and set **Per page**.
-
-A variation or baseline version whose run has a comment shows a comment icon; hover over it or focus it to read the comment.
-
-Click **History** on a card for the history of that variation. A card can also be deleted.
+- Cards show a preview.
+- Filter by **Branch**, **Browser**, **Device**, **OS**, **Tags** and **Viewport**.
+- Click **History** on a card to see its baselines.
+- A comment icon marks runs with a comment.
+- A card can be deleted.
 
 ## History
 
-The history page, **Baseline history (N)**, lists every baseline version of the variation. Each entry shows who approved it, when, and the status. Select a version to see its image, and open the test run it came from.
+**Baseline history (N)** lists every baseline version.
 
-## Merging branches
+1. Each entry shows who approved it, when, and the status.
+2. Select a version to see its image.
+3. Open the run it came from.
 
-The UI has no merge panel in 6.0. To merge one branch's baselines into another, call the API: `POST /test-variations/merge` with `projectId`, `fromBranch` and `toBranch`. On a merge run, the "merge into" chip in the [Run dialog](Run-dialog) shows which branch's baseline approving updates.
+## Merge branches
+
+There is no merge panel in 6.0. Use the API:
+
+- `POST /test-variations/merge` with `projectId`, `fromBranch` and `toBranch`.
+
+On a merge run, the "merge into" chip in the [Run dialog](Run-dialog) names the target branch.

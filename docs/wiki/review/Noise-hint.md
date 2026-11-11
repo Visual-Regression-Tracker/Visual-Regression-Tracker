@@ -1,39 +1,39 @@
 # Noise hint
 
-Different machines draw the same page a little differently: fonts, anti-aliasing, GPU. Those differences show up as unresolved runs and bury the real changes. The rendering-noise check, also called post-analysis, labels each unresolved run so you can review the likely changes first.
+Machines draw pages a little differently. That noise buries real changes.
+The noise hint (post-analysis) labels unresolved runs, so you review likely changes first.
 
-## What it does and does not do
+![Noise hint](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/screenshots/noise-build-light.png)
 
-- It marks a run **Likely change** or **Likely noise**, with a score.
-- It is a hint, never a verdict. It **never changes a run's status**, never approves or rejects anything, and has no effect on [Auto-approve](Auto-approve). You still decide every run.
-- It can call a small real change noise, such as a single digit, a dot or a faint border. Look at the diff before approving.
-- It runs only when you ask for it, on unresolved runs.
+## What it does
+
+- Labels a run **Likely change** or **Likely noise**, with a score.
+- Never changes a status. Never approves or rejects.
+- Does not trigger [Auto-approve](Auto-approve).
+- Can call a tiny change noise, such as one digit. Check the diff.
+- Runs only when you ask, on unresolved runs.
 
 ## Turn it on
 
-The check is off by default, for new projects and for projects upgraded from 5.x. Projects created on a 6.0 release candidate keep the setting they have. To switch it on for a project, open **Settings**, go to **Post-analysis**, turn on **Stage 1 · Blur** (and **Stage 2 · DINOv2 second look** if the DINOv2 service runs), then click **Save**.
+It is off by default. Not available for projects that use the VLM library.
 
-1. Open the project's **Settings** tab and go to **Post-analysis**. See [Project settings](Project-settings).
-2. Turn on **Stage 1 · Blur**. It runs on the VRT server and needs nothing else.
-3. Optional: turn on **Stage 2 · DINOv2 second look**. It asks the DINOv2 service about the patches the blur stage calls noise, and catches faint icons and borders. It needs the optional `dinov2` service and `DINOV2_URL`; see [Configuration](Configuration). Without the service the section says so and the blur stage alone judges the runs.
+1. Open the project's **Settings** tab, section **Post-analysis**.
+2. Turn on **Stage 1 · Blur**. It needs nothing else.
+3. Optional: turn on **Stage 2 · DINOv2 second look**. It needs `DINOV2_URL`, see [Configuration](Configuration).
 4. Click **Save**.
 
-The section is not available for projects that use the VLM comparator, and stage 2 needs stage 1.
+See also [Project settings](Project-settings).
 
-## Analyse a build or a run
+## Analyse
 
-- **Whole build:** open the **Build menu** (the ⋯ button in the build header) and choose **Analyse noise (N)**. N is the number of unresolved runs in the current list.
-- **Selected runs:** select runs in the run list and click **Analyse noise** in the selection bar. Only the unresolved ones are analysed. The rows switch to "Analysing…" at once.
-- **One run:** in the [Run dialog](Run-dialog), click the noise chip (**Not analysed**) and then **Analyse**. **Analyse again** repeats it.
+- **Whole build:** Build menu, **Analyse noise (N)**.
+- **Selected runs:** select runs, click **Analyse noise**.
+- **One run:** click the noise chip in the [Run dialog](Run-dialog), then **Analyse**.
 
-The build header shows the progress while runs are analysed.
+Use **Analyse again** to repeat. The build header shows progress.
 
 ## Read the result
 
-- The run list has a **Noise** column. Hover over a chip to see the score and the limitation. The column is hidden while the check is off for the project.
-- In the run dialog the chip shows the label and score. Click it to see the verdict, the score and the limitation, and to **Analyse** or **Analyse again**.
-- **Can't tell** means there is no verdict, for example because the images differ in size.
-
-## Measured quality
-
-On a benchmark of 120 real regressions, the blur stage kept 92 of them as likely changes and the two stages together 102, with no noise from the three test environments labelled as a change. The rest are mostly small text changes and faint borders, which is why the label is only a hint.
+- The run list has a **Noise** column. Hover for the score.
+- In the run dialog, click the chip for details.
+- **Can't tell** means no verdict, for example when image sizes differ.

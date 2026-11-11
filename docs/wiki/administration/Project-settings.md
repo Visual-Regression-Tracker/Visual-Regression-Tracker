@@ -1,31 +1,41 @@
 # Project settings
 
-Open a project and choose the **Settings** tab, or click **Project settings** on its card. Change what you need and click **Save**, or **Discard changes**. Editors and admins only.
+1. Open a project and choose the **Settings** tab.
+2. Change what you need.
+3. Click **Save**, or **Discard changes**.
+
+Editors and admins only.
+
+![Settings](https://raw.githubusercontent.com/Visual-Regression-Tracker/Visual-Regression-Tracker/master/public/screenshots/settings-light.png)
 
 ## General
 
 - **Project name**
-- **Main branch**: other branches are compared with its baselines.
-- **Builds to keep**: when a project has more builds, the oldest are removed with their runs.
-- **Max branch lifetime, days**: branches not used for this long are cleaned up.
+- **Main branch**: other branches are compared with it.
+- **Builds to keep**: older builds are removed with their runs.
+- **Max branch lifetime, days**: unused branches are cleaned up.
 
 ## Review
 
-- **Auto approve**: approve a run automatically when it looks the same as an earlier or already-approved baseline of this screen. See [Auto-approve](Auto-approve).
-- **Bulk approve/reject variations**: review the variations of a screen (for example all locales) in one dialog. Only variations with the same change are pre-selected.
-- **Variation axis**: which of `customTags`, `os`, `device`, `viewport` or `browser` differs inside a group. Runs that match on everything except this axis are reviewed together in **Approve variations** and **Reject variations**.
+- **Auto approve**: see [Auto-approve](Auto-approve).
+- **Bulk approve/reject variations**: review all variations of a screen in one dialog.
+- **Variation axis**: which of `customTags`, `os`, `device`, `viewport`, `browser` differs in a group.
 
 ## Comparison
 
-**Image comparison library**: `pixelmatch` (default), `lookSame`, `odiff` or `vlm`. Changing the library resets its settings.
+**Image comparison library**: `pixelmatch` (default), `lookSame`, `odiff` or `vlm`.
+Changing it resets its settings.
 
-- **pixelmatch**: **Pixel diff threshold** (0 to 1), **Ignore anti-aliasing**, **Allow diff dimensions**.
-- **lookSame**: **Strict**, **Tolerance**, **Antialiasing tolerance**, **Ignore anti-aliasing**, **Ignore caret**, **Allow diff dimensions**.
+- **pixelmatch**: **Pixel diff threshold** (0 to 1), **Ignore anti-aliasing**,
+  **Allow diff dimensions**.
+- **lookSame**: **Strict**, **Tolerance**, **Antialiasing tolerance**,
+  **Ignore anti-aliasing**, **Ignore caret**, **Allow diff dimensions**.
 - **odiff**: **Pixel diff threshold**, **Ignore anti-aliasing**, **Fail on layout diff**, **Output diff mask**.
-- **vlm**: pixelmatch plus a vision language model (Ollama or Gemini) that judges the difference. The Ollama address is set in [Configuration](Configuration).
+- **vlm**: pixelmatch plus a vision model (Ollama or Gemini). Ollama address: [Configuration](Configuration).
 
-Comparison settings change which runs become unresolved. The tolerance your tests send with a screenshot (`diffTollerancePercent`) still applies.
+The tolerance your tests send (`diffTollerancePercent`) still applies.
 
 ## Post-analysis
 
-The rendering-noise check has two switches, Stage 1 · Blur and Stage 2 · DINOv2 second look. See [Noise hint](Noise-hint). It is off for new projects and for projects upgraded from 5.x; switch it on here.
+Two switches: **Stage 1 · Blur** and **Stage 2 · DINOv2 second look**.
+Off for new and upgraded projects. See [Noise hint](Noise-hint).

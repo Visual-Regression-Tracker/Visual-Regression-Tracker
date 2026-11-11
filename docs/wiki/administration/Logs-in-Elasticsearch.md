@@ -1,9 +1,11 @@
 # Logs in Elasticsearch and Kibana
 
-For admins who monitor VRT through Kibana; Elasticsearch keeps the logs and needs more memory and CPU.
+For admins who watch VRT in Kibana. Elasticsearch needs extra memory and CPU.
 
-1. Clone this repository and go to its folder. In `.env`, set `JWT_SECRET` (`openssl rand -hex 32`) and check `REACT_APP_API_URL`.
-2. Start one of:
-   - with a new Elastic stack: `docker compose -f docker-compose.yml -f docker-compose.elastic.logging.yml up`
-   - with your organisation's Elasticsearch: set its hosts in `filebeat/config/filebeat.yml` and `ELASTIC_URL` in `.env`, then `docker compose -f docker-compose.yml -f docker-compose.logging.yml up`
-3. If Filebeat stops with `config file ("filebeat.yml") must be owned by the user identifier (uid=0) or root`, follow the [Elastic instructions](https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html) and start again.
+1. Clone this repository and open its folder.
+2. In `.env`, set `JWT_SECRET` (`openssl rand -hex 32`) and check `REACT_APP_API_URL`.
+3. Start one of:
+   - New Elastic stack: `docker compose -f docker-compose.yml -f docker-compose.elastic.logging.yml up`
+   - Your Elasticsearch: set hosts in `filebeat/config/filebeat.yml` and `ELASTIC_URL` in `.env`, then run `docker compose -f docker-compose.yml -f docker-compose.logging.yml up`
+4. If Filebeat fails with `config file ("filebeat.yml") must be owned by ... root`, fix the owner and start again.
+   See the [Elastic instructions](https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html).

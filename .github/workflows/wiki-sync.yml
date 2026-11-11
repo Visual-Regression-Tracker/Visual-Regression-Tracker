@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check page names are unique
+        run: |
+          dups=$(find docs/wiki -type f -name '*.md' -exec basename {} \; | sort | uniq -d)
+          if [ -n "$dups" ]; then echo "Duplicate page names: $dups"; exit 1; fi
       - name: Publish docs/wiki to the wiki
         run: |
           git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" "$RUNNER_TEMP/wiki"

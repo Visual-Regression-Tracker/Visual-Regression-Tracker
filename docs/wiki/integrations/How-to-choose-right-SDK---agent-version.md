@@ -1,13 +1,17 @@
-The project follows [Semantic Versioning 2.0.0](https://semver.org/).
+# How to choose the right SDK / agent version
+
+VRT follows [Semantic Versioning 2.0.0](https://semver.org/).
 
 ## Which version fits your server
 
-- **Server 6.0 works with 5.x clients.** The latest 5.x release of each SDK and agent keeps working, so you can upgrade the server first and the clients later. Use the latest 5.x release, because older ones handle fewer of 6.0's statuses and error codes. An sdk-python of 4.9.0 or older does not work with 6.0.
-- **6.0 clients work with server 6.0**, and need a newer runtime (below). Keep using 5.x where you cannot move the runtime.
-- **A 6.0 client does not support a 5.x server.** Upgrade the server first.
-- A difference in MINOR or PATCH version between server and client is fine.
+- **Server 6.0 works with 5.x clients.** Upgrade the server first, the clients later.
+  - Use the latest 5.x release of each client.
+  - sdk-python 4.9.0 or older does not work with 6.0.
+- **6.0 clients work with server 6.0.** They need a newer runtime.
+- **6.0 clients do not support a 5.x server.**
+- A different MINOR or PATCH version is fine.
 
-## Runtime minimums of the 6.0 clients
+## Runtime minimums of 6.0 clients
 
 | Client | Needs |
 |---|---|
@@ -19,10 +23,11 @@ The project follows [Semantic Versioning 2.0.0](https://semver.org/).
 | sdk-java | Java 25 |
 | sdk-dotnet | .NET 10 |
 
-The 5.x releases keep their older minimums, for example Node.js 22 for agent-codeceptjs 5.x.
+5.x releases keep their older minimums.
 
 ## Busy server
 
-When the server answers `503` with a `Retry-After` header, the SDKs (and the agents on top of them) wait and retry up to 3 times. They report `413` and `422` with a hint and do not retry them.
+- On `503` with `Retry-After`, SDKs and agents wait and retry up to 3 times.
+- `413` and `422` are reported with a hint, not retried.
 
-Check the release notes in each client's repository for the changes in every version.
+Each client's repository has release notes.
