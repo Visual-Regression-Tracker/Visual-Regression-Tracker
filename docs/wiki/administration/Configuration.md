@@ -41,6 +41,8 @@ VRT is configured with the `.env` file next to `docker-compose.yml`. Compose pas
 | `LOG_LEVEL` | `log,error,warn,fatal` | Comma-separated Nest log levels to keep. Add `debug` or `verbose` to see more. |
 | `DIFF_WORKER_MAX_HEAP_MB` | `512` | Memory limit of each image-comparison worker, in MB. Raise it if large screenshots make workers run out of memory. |
 
+Image comparison runs in a fixed pool of one worker fewer than the CPUs the API sees (1 to 8), with up to 256 jobs waiting. A full queue answers `503` with `Retry-After: 5`. The pool size cannot be changed.
+
 ## Image storage
 
 Images go to `./imageUploads` by default. For Amazon S3 set `STATIC_SERVICE=s3` and `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION` and `AWS_S3_BUCKET_NAME`.

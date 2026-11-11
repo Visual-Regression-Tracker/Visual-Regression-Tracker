@@ -6,7 +6,7 @@ Different machines draw the same page a little differently: fonts, anti-aliasing
 
 - It marks a run **Likely change** or **Likely noise**, with a score.
 - It is a hint, never a verdict. It **never changes a run's status**, never approves or rejects anything, and has no effect on [Auto-approve](Auto-approve). You still decide every run.
-- It can call a small real change noise, such as a single digit, a dot or a faint border. Look at the highlighted areas before approving.
+- It can call a small real change noise, such as a single digit, a dot or a faint border. Look at the diff before approving.
 - It runs only when you ask for it, on unresolved runs.
 
 ## Turn it on
@@ -17,8 +17,6 @@ The check is off by default, for new projects and for projects upgraded from 5.x
 2. Turn on **Stage 1 · Blur**. It runs on the VRT server and needs nothing else.
 3. Optional: turn on **Stage 2 · DINOv2 second look**. It asks the DINOv2 service about the patches the blur stage calls noise, and catches faint icons and borders. It needs the optional `dinov2` service and `DINOV2_URL`; see [Configuration](Configuration). Without the service the section says so and the blur stage alone judges the runs.
 4. Click **Save**.
-
-The thresholds **Amplitude threshold** and **Solid share, max** (blur) and **Distance threshold** (DINOv2) have defaults tuned on a benchmark of real screenshots, where noise stays below an amplitude of 51. Change them only if your environment is noisier.
 
 The section is not available for projects that use the VLM comparator, and stage 2 needs stage 1.
 
@@ -32,11 +30,9 @@ The build header shows the progress while runs are analysed.
 
 ## Read the result
 
-- The run list has a **Noise** column and a **Noise** filter chip with **Likely change**, **Likely noise** and **Not analysed**. Both are hidden while the check is off for the project.
-- In the run dialog the chip shows the label and score. Click it to see what each stage said (blur and DINOv2) and to show the areas that stage judged.
+- The run list has a **Noise** column. Hover over a chip to see the score and the limitation. The column is hidden while the check is off for the project.
+- In the run dialog the chip shows the label and score. Click it to see the verdict, the score and the limitation, and to **Analyse** or **Analyse again**.
 - **Can't tell** means there is no verdict, for example because the images differ in size.
-
-The view mode **Diff without noise** in the run dialog shows what is left of the diff when the noise is masked.
 
 ## Measured quality
 

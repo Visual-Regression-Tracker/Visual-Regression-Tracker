@@ -31,7 +31,7 @@
 - Any test framework, any platform: web, mobile, desktop, PDF.
 - Comparators per project: pixelmatch, looks-same, odiff, VLM (Ollama, Gemini).
 - Review: side by side, diff, fade; filters; bulk approve, reject, delete; undo; comments.
-- Rendering-noise hint: Likely change / Likely noise, Diff without noise; blur plus optional DINOv2.
+- Rendering-noise hint: Likely change / Likely noise; blur plus optional DINOv2.
 - Baseline history per screenshot, with who approved and when.
 - Branches: own baselines, merge between branches, auto-approve after merge.
 - Ignore areas.

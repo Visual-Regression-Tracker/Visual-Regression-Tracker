@@ -13,7 +13,7 @@ Open a project and choose the **Settings** tab, or click **Project settings** on
 
 - **Auto approve**: approve a run automatically when it looks the same as an earlier or already-approved baseline of this screen. See [Auto-approve](Auto-approve).
 - **Bulk approve/reject variations**: review the variations of a screen (for example all locales) in one dialog. Only variations with the same change are pre-selected.
-- **Variation axis**: which of `customTags`, `os`, `device`, `viewport` or `browser` differs inside a group. Runs that match on everything except this axis are grouped in the run list and reviewed together.
+- **Variation axis**: which of `customTags`, `os`, `device`, `viewport` or `browser` differs inside a group. Runs that match on everything except this axis are reviewed together in **Approve variations** and **Reject variations**.
 
 ## Comparison
 
@@ -28,4 +28,4 @@ Comparison settings change which runs become unresolved. The tolerance your test
 
 ## Post-analysis
 
-The rendering-noise check: Stage 1 · Blur, Stage 2 · DINOv2 second look and their thresholds. See [Noise hint](Noise-hint). It is off for new projects and for projects upgraded from 5.x; switch it on here.
+The rendering-noise check: Stage 1 · Blur, Stage 2 · DINOv2 second look. See [Noise hint](Noise-hint). It is off for new projects and for projects upgraded from 5.x; switch it on here.

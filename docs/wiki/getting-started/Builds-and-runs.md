@@ -21,13 +21,9 @@ Select several builds in the list to delete them together.
 
 ## Run list
 
-Runs are shown as a table or a grid of cards; switch with the **Table view** and **Grid view** toggle. The **View** menu sets:
+Runs are shown as a table or a grid of cards; switch with the **Table view** and **Grid view** toggle. Every variation is its own row or card. A card shows the diff when the run has one, otherwise the screenshot.
 
-- **Group by**: **None**, or **Variation** by the axis chosen in [Project settings](Project-settings) (one row or card per screen),
-- **Density** (table): **Comfortable**, **Standard** or **Compact**,
-- **Show diff in grid** (hotkey D).
-
-Filter chips narrow the list by OS, browser, viewport, device and tags, and by **Noise** when the noise check is on. Each tag chip searches its own field.
+Filter chips narrow the list by OS, browser, viewport, device and tags. Each tag chip searches its own field.
 
 A run that has a comment shows a comment icon in the table and on the cards; hover over it or focus it to read the comment.
 

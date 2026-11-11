@@ -18,14 +18,9 @@ If the baseline or the new image cannot be loaded, or the sizes differ, a messag
 |---|---|
 | **Side by side** | Baseline and new screenshot next to each other. |
 | **Diff** | The new screenshot with the differing pixels highlighted (hotkey D). |
-| **Diff without noise** | The diff with rendering noise masked, so what is left is more likely a real change. |
-| **Fade** | The new screenshot faded out to show the baseline through it, with a **Difference blend** option. |
+| **Fade** | The new screenshot faded out to show the baseline through it. |
 
 Zoom with the controls in the footer: **Zoom in**, **Zoom out**, **Fit into screen**, **Original size**.
-
-### Diff without noise
-
-This view is computed in your browser from the baseline and the new screenshot. It is a reading aid, not a result: the run keeps its status. A banner warns when faint changes may be hidden, or when DINOv2 sees a change this view hides. The mode is not available for images with semi-transparent pixels, images of different sizes, or very large images.
 
 ## Ignore areas
 

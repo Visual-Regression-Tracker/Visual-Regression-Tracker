@@ -13,7 +13,7 @@ This wiki describes VRT 6.0. If you are on 5.x, start with [Upgrade from 5.x](Up
 
 ## Review
 
-- [Run dialog](Run-dialog): view modes, Diff without noise, ignore areas, comments, Undo.
+- [Run dialog](Run-dialog): view modes, ignore areas, comments, Undo.
 - [Noise hint](Noise-hint): flag runs that look like rendering noise.
 - [Variations and history](Variations-and-history): every screen and its baseline versions.
 - [Statistics](Statistics): results per build.

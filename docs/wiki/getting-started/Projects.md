@@ -4,7 +4,7 @@ A project holds the builds, screens (variations) and baselines of one applicatio
 
 ## Project list
 
-The **Projects** page shows your projects as cards, in the sections **Favourites**, **Recently opened** and **Other projects**. The search box (placeholder "Search projects") looks at the name and the main branch. Press / anywhere on the page to jump to it ("Press / to search").
+The **Projects** page shows your projects as cards, in the sections **Favourites** and **Other projects**, each sorted by name. The search box (placeholder "Search projects") looks at the name and the main branch. Press / anywhere on the page to jump to it ("Press / to search").
 
 - Click anywhere on a card to open the project.
 - **Add to favourites** / **Remove from favourites**: the star on a card pins the project to **Favourites**.
@@ -21,7 +21,7 @@ The project id that your tests need is in the address of the project page, and t
 
 ## Project switcher
 
-On a project page, the breadcrumb at the top has a project menu. It groups projects as **Favourites**, **Recently opened** and **Other projects** and searches as you type.
+On a project page, the breadcrumb at the top has a project menu. It groups projects as **Favourites** and **Other projects** and searches as you type.
 
 ## Project page
 
