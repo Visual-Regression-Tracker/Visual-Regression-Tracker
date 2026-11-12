@@ -11,7 +11,7 @@ A **build** is one execution of your test suite. Each screenshot it sends is a *
 3. Select a build to see its runs.
 
 The header shows the number, CI build id, branch and status.
-The chips count runs per status. Click one to filter. See [Statuses](Statuses).
+The chips count runs per status, among the runs the name and tag filters leave. A status with no runs is hidden unless selected. Click one to filter. See [Statuses](Statuses).
 
 The **Build menu** (the ⋯ button):
 
