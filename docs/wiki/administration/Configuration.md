@@ -26,7 +26,7 @@ The old sample value `jwtPrivateKey` is refused. Changing the secret signs every
 
 ## Versions
 
-- `VRT_UI_VERSION`, `VRT_API_VERSION`, `VRT_MIGRATION_VERSION`: image tags. Use one version for all.
+- `VRT_UI_VERSION`, `VRT_API_VERSION`, `VRT_MIGRATION_VERSION`: image tags. Use the versions of one VRT release; they can differ (VRT 6.1.0 is UI 6.1.0 with API and migration 6.0.0).
 - `VRT_DINOV2_VERSION`: tag of the optional DINOv2 service.
 
 ## Database

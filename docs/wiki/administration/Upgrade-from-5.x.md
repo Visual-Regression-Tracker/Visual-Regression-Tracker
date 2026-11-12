@@ -40,7 +40,7 @@ Upgrade UI and API together. Run the commands in the VRT folder (Linux, macOS or
 
 6. Check:
    - `docker compose logs migration` ends with "All migrations have been successfully applied".
-   - The UI help menu shows 6.0.0.
+   - The UI help menu shows the UI version from `.env` (6.1.0 for VRT 6.1.0).
    - Then delete `./db-pg12` and `vrt-pg12.dump`.
 
 ## Rollback

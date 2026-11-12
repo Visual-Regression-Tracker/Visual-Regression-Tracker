@@ -1,6 +1,6 @@
 # Visual Regression Tracker
 
-VRT is a self-hosted tool for visual testing. This wiki describes VRT 6.0.
+VRT is a self-hosted tool for visual testing. This wiki describes VRT 6.1.
 
 1. Your tests send screenshots to VRT.
 2. VRT compares each one with its baseline.

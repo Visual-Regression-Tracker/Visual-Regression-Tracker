@@ -12,6 +12,7 @@ A **build** is one execution of your test suite. Each screenshot it sends is a *
 
 The header shows the number, CI build id, branch and status.
 The chips count runs per status. Click one to filter. See [Statuses](Statuses).
+With a name or tag filter set, they count only the runs it leaves, and a status with no runs is hidden unless it is selected.
 
 The **Build menu** (the ⋯ button):
 
@@ -26,6 +27,9 @@ Select several builds to delete them together.
 
 - Switch between **Table view** and **Grid view**.
 - Filter by OS, browser, viewport, device and tags.
+- Turn on **Group variations** to show one row or card per screen, with its variations behind it.
+  The project's **Variation axis** sets which variations go together. See [Project settings](Project-settings).
+  A chip shows how many runs a group holds. Selecting a group selects all its runs, so bulk actions apply to each of them.
 - A comment icon marks runs with a comment. Hover to read it.
 - Click a run to open the [Run dialog](Run-dialog).
 
