@@ -60,8 +60,9 @@ if [ ! -x "$(command -v docker)" ]; then
     echo "Visual Regression Tracker requires Docker. Check install docs here - $DOCKER_INSTALL_URL"
 fi
 
-if [ ! -x "$(command -v docker-compose)" ]; then
-    echo "Visual Regression Tracker requires docker-compose. Check install docs here - $DOCKER_COMPOSE_URL"
+if ! docker compose version >/dev/null 2>&1; then
+    echo "Visual Regression Tracker requires Docker Compose v2 (docker compose). Check install docs here - $DOCKER_COMPOSE_URL"
+    exit 1
 fi
 
 echo " "
@@ -97,5 +98,16 @@ fi
 rm -f .envr
 
 echo " "
+echo Preparing the image folder for the API, which runs as uid 1000
+mkdir -p imageUploads
+if [ "$(uname)" = "Linux" ]; then
+    if [ "$(id -u)" -eq 0 ]; then
+        chown -R 1000:1000 imageUploads
+    else
+        sudo chown -R 1000:1000 imageUploads
+    fi
+fi
+
+echo " "
 echo Starting docker
-docker-compose up 
+docker compose up

@@ -15,7 +15,6 @@ services:
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
       VRT_VERSION: ${VRT_UI_VERSION}
-      PORT: ${PORT}
       REACT_APP_OIDC_AUTO_REDIRECT: ${REACT_APP_OIDC_AUTO_REDIRECT:-false}
     restart: always
   api:
@@ -31,7 +30,13 @@ services:
       JWT_LIFE_TIME: ${JWT_LIFE_TIME}
       APP_FRONTEND_URL: ${APP_FRONTEND_URL}
       BODY_PARSER_JSON_LIMIT: ${BODY_PARSER_JSON_LIMIT}
-      ELASTIC_URL: ${ELASTIC_URL}
+      MULTIPART_FILE_SIZE_LIMIT: ${MULTIPART_FILE_SIZE_LIMIT:-104857600}
+      MAX_IMAGE_PIXELS: ${MAX_IMAGE_PIXELS:-100000000}
+      REGISTRATION_ENABLED: ${REGISTRATION_ENABLED:-true}
+      LOG_LEVEL: ${LOG_LEVEL:-}
+      REDIS_URL: ${REDIS_URL:-}
+      DINOV2_URL: ${DINOV2_URL:-}
+      DINOV2_TIMEOUT_MS: ${DINOV2_TIMEOUT_MS:-}
       LDAP_ENABLED: ${LDAP_ENABLED}
       LDAP_TLS_NO_VERIFY: ${LDAP_TLS_NO_VERIFY}
       LDAP_URL: ${LDAP_URL}
@@ -70,6 +75,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      migration:
+        condition: service_completed_successfully
     restart: always
   migration:
     image: visualregressiontracker/migration:${VRT_MIGRATION_VERSION}
@@ -82,8 +89,16 @@ services:
       postgres:
         condition: service_healthy
     restart: on-failure
+  dinov2:
+    image: visualregressiontracker/dinov2:${VRT_DINOV2_VERSION}
+    profiles: ["dinov2"]
+    restart: always
+    mem_limit: ${DINOV2_MEM_LIMIT:-2g}
+    environment:
+      DINOV2_MAX_PIXELS: ${DINOV2_MAX_PIXELS:-20000000}
+      DINOV2_MAX_QUEUE: ${DINOV2_MAX_QUEUE:-2}
   postgres:
-    image: postgres:12
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -94,7 +109,7 @@ services:
     expose:
       - "${POSTGRES_PORT}"
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./db:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER"]
       interval: 10s
