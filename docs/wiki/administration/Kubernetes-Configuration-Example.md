@@ -114,7 +114,7 @@ spec:
     spec:
       containers:
       - name: vrt-frontend
-        image: visualregressiontracker/ui:6.0.0
+        image: visualregressiontracker/ui:6.1.0
         env:
         - name: REACT_APP_API_URL
           value: <REACT_APP_API_URL>

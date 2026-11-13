@@ -20,6 +20,7 @@ Editors and admins only.
 - **Auto approve**: see [Auto-approve](Auto-approve).
 - **Bulk approve/reject variations**: review all variations of a screen in one dialog.
 - **Variation axis**: which of `customTags`, `os`, `device`, `viewport`, `browser` differs in a group.
+  Such runs are grouped in the run list by **Group variations** and reviewed together in **Approve variations**.
 
 ## Comparison
 
